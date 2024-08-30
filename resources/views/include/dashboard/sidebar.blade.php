@@ -16,28 +16,28 @@
 {{--              </a>--}}
 {{--            </li>--}}
             <li class="nav-item">
-              <a class="nav-link" href="index.html">
+              <a class="nav-link" href="{{route('dashboard')}}">
                 <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="">
+              <a class="nav-link" href="{{route('categories.index')}}">
                 <span class="menu-title">Category</span>
                 <i class="mdi mdi-collage menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/pages/forms/basic_elements.html">
-                <span class="menu-title">product</span>
+              <a class="nav-link" href="{{route('trips.index')}}">
+                <span class="menu-title">trips</span>
                 <i class="mdi mdi-book menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/pages/charts/chartjs.html">
-                <span class="menu-title">Charts</span>
-                <i class="mdi mdi-chart-bar menu-icon"></i>
+              <a class="nav-link" href="{{route('guides.index')}}">
+                <span class="menu-title">guide</span>
+                <i class="mdi mdi-account-card-details menu-icon"></i>
               </a>
             </li>
 
