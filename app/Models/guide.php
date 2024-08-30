@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class guide extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'image',
+        'description',
+        'age',
+        'gender',
+    ];
+
+    public function trips()
+    {
+        return $this->belongsToMany(Trip::class, 'guide_trip');
+    }
 }
