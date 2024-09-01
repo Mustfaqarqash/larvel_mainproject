@@ -50,21 +50,33 @@ class TripController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show( $tripid)
+    public function show($tripid)
     {
-        $trip = trip::find($tripid);
+        // Find the trip by ID
+        $trip = Trip::find($tripid);
 
-        $tripGuids = guide_trip::where('trip_id' , $tripid)->get();
-        $guides = null;
+        // Get all the guide_trip records related to this trip
+        $tripGuids = Guide_Trip::where('trip_id', $tripid)->get();
+
+        // Initialize an empty array to hold the guide details
+        $guides = [];
+
+        // Loop through each guide_trip record
         foreach ($tripGuids as $tripGuid) {
-            $guides = guide::find($tripGuid->guide_id);
-//            dd($guide);
+            // Find the guide by its ID and add it to the $guides array
+            $guide = Guide::find($tripGuid->guide_id);
+            array_push($guides, $guide);
         }
 
-        $tripImages = trip_images::where('trip_id' , $tripid)->get();
-//        dd($tripImages);
-//        dd($tripGuids);
-      return view('dashboard/trips/show', ['tripImages'=>$tripImages , 'tripGuids'=>$guides , 'trip'=>$trip]);
+        // Get all the images associated with the trip
+        $tripImages = Trip_Images::where('trip_id', $tripid)->get();
+
+        // Pass the trip, guides, and images data to the view
+        return view('dashboard/trips/show', [
+            'tripImages' => $tripImages,
+            'tripGuids' => $guides,
+            'trip' => $trip
+        ]);
     }
 
     /**

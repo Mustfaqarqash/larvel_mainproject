@@ -1,7 +1,12 @@
 @extends("layouts.dashboard_master")
 @section("headTitle", "One")
 @section("content")
+<<<<<<< HEAD
 
+=======
+    <div class="card">
+        <div class="card-body">
+>>>>>>> main
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="title-1">Trips</h2>
@@ -12,8 +17,12 @@
         </a>
     </div>
 
+<<<<<<< HEAD
     <div class="card">
         <div class="card-body">
+=======
+
+>>>>>>> main
             <div class="row">
                 <div class="col-lg-12">
                     <div class="table-responsive table--no-card m-b-40">
@@ -47,6 +56,7 @@
 
 
 
+<<<<<<< HEAD
                                     <td>
                                         <a href="{{ route('trips.edit', $trip->id) }}">
                                             <button type="submit" class="btn btn-outline-info" ><i class="mdi mdi-table-edit"></i></button>
@@ -72,11 +82,30 @@
                         </table>
                     </div>
                 </div>
+=======
+                            <td>
+                                <a href="{{ route('trips.edit', $trip->id) }}">
+                                    <button type="submit" class="btn btn-secondary">Edit</button>
+                                </a>
+                                <form action="{{ route('trips.destroy', $trip->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">DELETE</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+>>>>>>> main
             </div>
         </div>
     </div>
 </div>
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> main
 @endsection
