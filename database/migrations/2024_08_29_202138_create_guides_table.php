@@ -20,13 +20,7 @@ return new class extends Migration
             $table->string('gender');
             $table->timestamps();
         });
-        Schema::create('guide_trip', function (Blueprint $table){
-           $table->unsignedBigInteger('trip_id');
-           $table->foreign('trip_id')->references('id')->on('trips');
-           $table->unsignedBigInteger('guide_id');
-           $table->foreign('guide_id')->references('id')->on('guides');
-           $table->timestamps();
-        });
+
     }
 
     /**

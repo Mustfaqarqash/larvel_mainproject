@@ -2,27 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\guide;
+use App\Models\testimonial;
+use App\Models\trip;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
-        $this->middleware('auth');
+
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+
     public function index()
     {
-        return view('home');
+        $testimonials = testimonial::all();
+        $alltrips =trip::all();
+        $allguides =guide::all();
+        return view('landing_page',['testimonials' => $testimonials ,'alltrips'=>$alltrips , 'allguides'=>$allguides]);
     }
 }
