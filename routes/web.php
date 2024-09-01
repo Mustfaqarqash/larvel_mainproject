@@ -65,3 +65,15 @@ Route::post('/tripguide/store/{id}', [GuideTripController::class, 'store'])->nam
     Route::get('/deatils' , function (){
     return view('dashboard/trips.show_userside');
 });
+
+
+Route::get('/tripimages/create/{id}', [TripImagesController::class, 'create'])->name('tripimages.create');
+Route::post('/tripimages/store/{id}', [TripImagesController::class, 'store'])->name('tripimages.store');
+
+Route::get('/tripguide/create/{id}', [GuideTripController::class, 'create'])->name('tripguide.create');
+Route::post('/tripguide/store/{id}', [GuideTripController::class, 'store'])->name('tripguide.store');
+
+
+//tripimages start----------------------------
+//Route::resource('/tripimages', TripImagesController::class)->middleware(['auth', 'isAdmin']);
+//tripimages end----------------------------

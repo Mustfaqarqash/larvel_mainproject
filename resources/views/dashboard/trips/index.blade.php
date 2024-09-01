@@ -47,36 +47,23 @@
 
 
 
-                                    <td>
-                                        <a href="{{ route('trips.edit', $trip->id) }}">
-                                            <button type="submit" class="btn btn-outline-info" ><i class="mdi mdi-table-edit"></i></button>
-                                        </a>
-                                        <form action="{{ route('trips.destroy', $trip->id) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-outline-danger"><i class="mdi mdi-delete"></i></button>
-                                        </form>
-                                        <a href="{{ route('tripimages.create' , $trip->id) }}">
-                                            <button type="submit" class="btn btn-outline-success"><i class="mdi mdi-tooltip-image"></i></button>
-                                        </a>
-                                        <a  href="{{ route('tripguide.create' , $trip->id) }}">
-                                            <button type="submit" class="btn btn-outline-primary"><i class="mdi mdi-account"></i></button>
-                                        </a>
-                                        <a  href="{{ route('trips.show' , $trip->id) }}">
-                                            <button type="submit" class="btn btn-outline-info"><i class="mdi mdi-information-outline"></i></button>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                            <td>
+                                <a href="{{ route('trips.edit', $trip->id) }}">
+                                    <button type="submit" class="btn btn-secondary">Edit</button>
+                                </a>
+                                <form action="{{ route('trips.destroy', $trip->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">DELETE</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
-
-
 
 @endsection
