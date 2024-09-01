@@ -39,12 +39,12 @@
                             <td>{{ $guide->age }}</td>
                             <td>{{ $guide->gender }}</td>
                             <td>
-                                <a href="{{ route('guides.show', $guide->id) }}" class="btn btn-info btn-sm">View</a>
-                                <a href="{{ route('guides.edit', $guide->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="{{ route('guides.show', $guide->id) }}" class="btn btn-outline-primary"><i class="mdi mdi-information-outline"></i></a>
+                                <a href="{{ route('guides.edit', $guide->id) }}" class="btn btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
                                 <form action="{{ route('guides.destroy', $guide->id) }}" method="POST" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    <button type="submit" class="btn btn-outline-danger"><i class="mdi mdi-delete"></i></button>
                                 </form>
                             </td>
                         </tr>

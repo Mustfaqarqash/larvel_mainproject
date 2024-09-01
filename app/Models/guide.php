@@ -19,6 +19,6 @@ class guide extends Model
 
     public function trips()
     {
-        return $this->belongsToMany(Trip::class, 'guide_trip');
+        return $this->belongsToMany(Trip::class, 'guide_trips');
     }
 }
