@@ -19,12 +19,16 @@ Route::get('/', function () {
 return redirect()->route('home');
 });
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e30d245c75a7f14a4566ca661b702fed046420f5
 //------------------------------ contact routes------------------------------------
 Route::get('/contact',[EmailController::class,'contactForm']);
 Route::post('/contactMail',[EmailController::class,'contact'])->name('contact')->middleware('verified');
 //------------------------------ contact routes------------------------------------
 
 Route::get('/dash',[DashboardController::class, 'index'] )->middleware(['isAdmin'])->name('dashboard');
+<<<<<<< HEAD
 =======
 >>>>>>> main
 
@@ -70,6 +74,9 @@ Route::post('/tripguide/store/{id}', [GuideTripController::class, 'store'])->nam
 
 <<<<<<< HEAD
 =======
+=======
+
+>>>>>>> e30d245c75a7f14a4566ca661b702fed046420f5
 Auth::routes( [
     'verify' => true
 ]);
@@ -112,6 +119,7 @@ Route::post('/tripguide/store/{id}', [GuideTripController::class, 'store'])->nam
 //tripimages start----------------------------
 //Route::resource('/tripimages', TripImagesController::class)->middleware(['auth', 'isAdmin']);
 //tripimages end----------------------------
+<<<<<<< HEAD
 
 
     Route::get('/deatils' , function (){
@@ -130,3 +138,5 @@ Route::post('/tripguide/store/{id}', [GuideTripController::class, 'store'])->nam
 //tripimages start----------------------------
 //Route::resource('/tripimages', TripImagesController::class)->middleware(['auth', 'isAdmin']);
 //tripimages end----------------------------
+=======
+>>>>>>> e30d245c75a7f14a4566ca661b702fed046420f5
