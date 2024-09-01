@@ -5,15 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class trip_images extends Model
+class guide_trip extends Model
 {
     use HasFactory;
     protected $fillable =[
-        'image',
+        'guide_id',
         'trip_id',
     ];
-
-  public function trip(){
-      $this->belongsTo(trip::class);
-  }
 }

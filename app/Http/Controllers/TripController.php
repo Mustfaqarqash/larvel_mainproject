@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\guide;
+use App\Models\guide_trip;
 use App\Models\trip;
 use App\Models\category;
+use App\Models\trip_images;
 use Illuminate\Http\Request;
 
 class TripController extends Controller
@@ -47,9 +50,21 @@ class TripController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(trip $trip)
+    public function show( $tripid)
     {
+        $trip = trip::find($tripid);
 
+        $tripGuids = guide_trip::where('trip_id' , $tripid)->get();
+        $guides = null;
+        foreach ($tripGuids as $tripGuid) {
+            $guides = guide::find($tripGuid->guide_id);
+//            dd($guide);
+        }
+
+        $tripImages = trip_images::where('trip_id' , $tripid)->get();
+//        dd($tripImages);
+//        dd($tripGuids);
+      return view('dashboard/trips/show', ['tripImages'=>$tripImages , 'tripGuids'=>$guides , 'trip'=>$trip]);
     }
 
     /**

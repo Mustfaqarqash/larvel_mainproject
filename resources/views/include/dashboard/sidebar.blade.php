@@ -46,6 +46,12 @@
                 <i class="mdi mdi-account-card-details menu-icon"></i>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('users.index')}}">
+                <span class="menu-title">user</span>
+                <i class="mdi mdi-account-card-details menu-icon"></i>
+            </a>
+        </li>
 
 
     </ul>

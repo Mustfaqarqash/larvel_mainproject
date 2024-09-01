@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('guides', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('image')->nullable();
-            $table->string('description');
-            $table->string('age');
-            $table->string('gender');
+        Schema::create('guide_trips', function (Blueprint $table){
+            $table->unsignedBigInteger('trip_id');
+            $table->foreign('trip_id')->references('id')->on('trips');
+            $table->unsignedBigInteger('guide_id');
+            $table->foreign('guide_id')->references('id')->on('guides');
             $table->timestamps();
         });
-
     }
 
     /**
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('guides');
+        Schema::dropIfExists('guide_trips');
     }
 };

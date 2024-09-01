@@ -45,12 +45,12 @@
                                 <td>{{ $category->created_at->format('Y-m-d') }}</td>
                                 <td>
                                     <a href="{{ route('categories.edit', $category->id) }}">
-                                        <button type="button" class="btn btn-secondary">Edit</button>
+                                        <button type="submit" class="btn btn-outline-info" ><i class="mdi mdi-table-edit"></i></button>
                                     </a>
                                     <a href="{{ route('categoties', $category->id) }}">
-                                        <button type="button" class="btn btn-secondary">view</button>
+                                        <button type="submit" class="btn btn-outline-primary" ><i class="mdi mdi-information-outline"></i></button>
                                     </a>
-                                    <button type="button" class="btn btn-danger" onclick="confirmDeletion(event, '{{ route('categories.destroy', $category->id) }}')">DELETE</button>
+                                    <button type="button" class="btn btn-outline-danger" onclick="confirmDeletion(event, '{{ route('categories.destroy', $category->id) }}')"><i class="mdi mdi-delete"></i></button>
                                 </td>
                             </tr>
                         @endforeach
