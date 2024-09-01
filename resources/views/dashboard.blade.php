@@ -1,5 +1,5 @@
 @extends('layouts.dashboard_master')
-@section('headTitle', 'One')
+@section('dashboard', 'One')
 @section('content')
     <div class="row">
         <div class="col-md-4 stretch-card grid-margin">
@@ -62,7 +62,7 @@
 
     <div class="row">
         <!-- Bookings Chart -->
-        <div class="col-lg-5 grid-margin stretch-card">
+        <div class="col-lg-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Bookings</h4>
@@ -73,7 +73,7 @@
             </div>
         </div>
         <!-- Users Chart -->
-        <div class="col-lg-5 grid-margin stretch-card">
+        <div class="col-lg-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Users</h4>
@@ -135,20 +135,24 @@
         new Chart(ctx2, {
             type: 'pie',
             data: {
-                labels: ['customers', 'admins'],
+                labels: ['customers', 'admins' , 'guides'],
                 datasets: [{
                     label: 'The number of users',
                     data: [
                         {{ $custumers }},
-                        {{ $admins }}
+                        {{ $admins }},
+                        {{ count($guides) }}
+
                     ],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)'
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(75, 192, 55, 0.2)',
                     ],
                     borderColor: [
                         'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)'
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(75, 192, 55, 0.2)'
                     ],
                     borderWidth: 1
                 }]
@@ -170,7 +174,4 @@
             }
         });
     </script>
-
-
-
 @endsection

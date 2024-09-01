@@ -1,11 +1,16 @@
 <?php
-
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\EmailController;
-
-
+use App\Http\Controllers\guide_trips;
+use App\Http\Controllers\GuideController;
+use App\Http\Controllers\GuideTripController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\TripController;
+use App\Http\Controllers\TripImagesController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,23 +25,13 @@ use App\Http\Controllers\EmailController;
 
 
 Route::get('/', function () {
-    return view('landing_page');
+return redirect()->route('home');
 });
-// dashboard route
-Route::get('/dash',[DashboardController::class, 'index'] )->middleware(['isAdmin'])->name('dashboard');
-
-Auth::routes( [
-    'verify' => true
-]);
+Route::get('/dash', function () {
+    return view('dashboard');
+})->middleware(['isAdmin'])->name('dashboard');
+Auth::routes();
 
 Route::get('/home',function () {
     return view('landing_page');
 })->name('home');
-
-
-
-//------------------------------ contact routes------------------------------------
-Route::get('/contact',[EmailController::class,'contactForm']);
-Route::post('/contactMail',[EmailController::class,'contact'])->name('contact')->middleware('verified');
-//------------------------------ contact routes------------------------------------
-

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\testimonial;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 
 class TestimonialController extends Controller
@@ -12,7 +14,9 @@ class TestimonialController extends Controller
      */
     public function index()
     {
-        //
+        $testimonials = testimonial::all();
+        $users = User::all();
+        return view('dashboard/testimonials/index', ['testimonials' => $testimonials]);
     }
 
     /**
@@ -20,7 +24,7 @@ class TestimonialController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -28,15 +32,30 @@ class TestimonialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'testimonial' => 'required|string',
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $testimonial = new Testimonial();
+        $testimonial->testimonial = $validatedData['testimonial'];
+        $testimonial->user_id = $validatedData['user_id']; // تعيين قيمة user_id
+        $testimonial->save();
+
+        return redirect()->route('home');
     }
+
 
     /**
      * Display the specified resource.
      */
-    public function show(testimonial $testimonial)
+    public function show()
     {
-        //
+        $testimonials = testimonial::all();
+        $users = User::all();
+
+        return view('dashboard/testimonials/index', ['testimonials' => $testimonials]);
+
     }
 
     /**
@@ -60,6 +79,7 @@ class TestimonialController extends Controller
      */
     public function destroy(testimonial $testimonial)
     {
-        //
-    }
+        $testimonial->delete();
+
+        return redirect()->route('testimonials.index');    }
 }

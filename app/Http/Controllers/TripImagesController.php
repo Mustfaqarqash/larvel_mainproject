@@ -7,57 +7,73 @@ use Illuminate\Http\Request;
 
 class TripImagesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+
+    public function create($tripid)
     {
         //
+
+        return view('dashboard/tripImages.create', compact('tripid'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+    public function store(Request $request, $tripid)
     {
-        //
+        // Validate the image
+        $validatedData = $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Ensure that an image is required and is of a valid image type
+        ]);
+
+        // Handle the image upload
+        if ($request->hasFile('image')) {
+            // Get the uploaded file
+            $file = $request->file('image');
+
+            // Generate a unique filename
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+
+            // Define the path where the image will be stored
+            $path = public_path('uploads/trip_images/');
+
+            // Move the image to the specified path
+            $file->move($path, $filename);
+
+            // Save the image path and trip ID to the database
+            trip_images::create([
+                'image' => 'uploads/trip_images/' . $filename, // Save the relative path of the uploaded image
+                'trip_id' => $tripid, // Save the trip ID
+            ]);
+        }
+
+        // Redirect to the trips index page
+        return redirect()->route('trips.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
+
     public function show(trip_images $trip_images)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(trip_images $trip_images)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, trip_images $trip_images)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(trip_images $trip_images)
     {
         //

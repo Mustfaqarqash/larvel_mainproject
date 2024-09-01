@@ -2,64 +2,95 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\guide;
+use App\Models\Guide;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GuideController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $guides = Guide::all();
+        return view('dashboard/guides/index', compact('guides'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('dashboard/guides.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'required|string',
+            'age' => 'required|string|max:10',
+            'gender' => 'required|string|max:10',
+        ]);
+
+        $guide = new Guide($request->except('image'));
+
+        if ($request->hasFile('image')) {
+            $imageName = time() . '_' . $request->file('image')->getClientOriginalName();
+            $imagePath = $request->file('image')->move(public_path('images/guides'), $imageName);
+            $guide->image = 'images/guides/' . $imageName;
+        }
+
+        $guide->save();
+
+        return redirect()->route('guides.index')
+            ->with('success', 'Guide created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(guide $guide)
+    public function show(Guide $guide)
     {
-        //
+        return view('dashboard/guides.show', compact('guide'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(guide $guide)
+    public function edit(Guide $guide)
     {
-        //
+        return view('dashboard/guides.edit', compact('guide'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, guide $guide)
+    public function update(Request $request, Guide $guide)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'required|string',
+            'age' => 'required|string|max:10',
+            'gender' => 'required|string|max:10',
+        ]);
+
+        $guide->fill($request->except('image'));
+
+        if ($request->hasFile('image')) {
+            // Delete old image
+            if ($guide->image && file_exists(public_path($guide->image))) {
+                unlink(public_path($guide->image));
+            }
+
+            $imageName = time() . '_' . $request->file('image')->getClientOriginalName();
+            $imagePath = $request->file('image')->move(public_path('images/guides'), $imageName);
+            $guide->image = 'images/guides/' . $imageName;
+        }
+
+        $guide->save();
+
+        return redirect()->route('guides.index')
+            ->with('success', 'Guide updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(guide $guide)
+    public function destroy(Guide $guide)
     {
-        //
+        if ($guide->image && file_exists(public_path($guide->image))) {
+            unlink(public_path($guide->image));
+        }
+
+        $guide->delete();
+
+        return redirect()->route('guides.index')
+            ->with('success', 'Guide deleted successfully.');
     }
 }
