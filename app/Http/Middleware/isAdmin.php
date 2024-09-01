@@ -16,10 +16,15 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth()->user()->usertype == 'admin') {
-            return $next($request);
-        }else
-            abort(401);
+        if(Auth()->user()){
+            if (Auth()->user()->usertype == 'admin') {
+                return $next($request);
+            }else{
+                return redirect('/');
+            }
+        }else{
+            return redirect()->route('login');
+        }
 
     }
 }
