@@ -20,7 +20,7 @@ return redirect()->route('home');
 });
 
 
-Route::get('/dash',[DashboardController::class, 'index'] )->middleware(['isAdmin'])->name('dashboard');
+Route::get('/dash',[DashboardController::class, 'index'] )->middleware(['auth','isAdmin'])->name('dashboard');
 
 
 
