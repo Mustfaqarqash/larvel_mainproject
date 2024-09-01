@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmailController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +22,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('landing_page');
 });
-Route::get('/dash', function () {
-    return view('dashboard');
-})->middleware(['isAdmin'])->name('dashboard');
-Auth::routes();
+// dashboard route
+Route::get('/dash',[DashboardController::class, 'index'] )->middleware(['isAdmin'])->name('dashboard');
+
+Auth::routes( [
+    'verify' => true
+]);
 
 Route::get('/home',function () {
     return view('landing_page');
 })->name('home');
+
+
+
+//------------------------------ contact routes------------------------------------
+Route::get('/contact',[EmailController::class,'contactForm']);
+Route::post('/contactMail',[EmailController::class,'contact'])->name('contact')->middleware('verified');
+//------------------------------ contact routes------------------------------------
+

@@ -198,7 +198,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../../index.html">
+            <a class="nav-link" href="../../dash">
               <span class="menu-title">Dashboard</span>
               <i class="mdi mdi-home menu-icon"></i>
             </a>
@@ -292,42 +292,38 @@
             </nav>
           </div>
           <div class="row">
-            
-
-
-        
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Bar chart</h4>
                   <div>
-              <canvas id="myChart"></canvas>
-            </div>
+                    <canvas id="myChart"></canvas>
+                  </div>
 
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-            <script>
-              const ctx = document.getElementById('myChart');
+                  <script>
+                    const ctx = document.getElementById('myChart');
 
-              new Chart(ctx, {
-                type: 'bar',
-                data: {
-                  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                  datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 1
-                  }]
-                },
-                options: {
-                  scales: {
-                    y: {
-                      beginAtZero: true
-                    }
-                  }
-                }
-              });
-            </script>
+                    new Chart(ctx, {
+                      type: 'bar',
+                      data: {
+                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                        datasets: [{
+                          label: '# of Votes',
+                          data: [20, 19, 3, 5, 2, 3],
+                          borderWidth: 1
+                        }]
+                      },
+                      options: {
+                        scales: {
+                          y: {
+                            beginAtZero: true
+                          }
+                        }
+                      }
+                    });
+                  </script>
                 </div>
               </div>
             </div>
