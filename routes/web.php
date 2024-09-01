@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\guide_trips;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\GuideTripController;
@@ -20,7 +21,9 @@ Route::get('/dash', function () {
 return view('dashboard');
 })->middleware(['isAdmin'])->name('dashboard');
 
-Auth::routes();
+Auth::routes( [
+    'verify' => true
+]);
 
 Route::get('/home',[HomeController::class,'index'])->name('home');
 
@@ -69,11 +72,19 @@ Route::post('/tripguide/store/{id}', [GuideTripController::class, 'store'])->nam
 
 Route::get('/tripimages/create/{id}', [TripImagesController::class, 'create'])->name('tripimages.create');
 Route::post('/tripimages/store/{id}', [TripImagesController::class, 'store'])->name('tripimages.store');
+Route::delete('/trip_images/{id}', [TripImagesController::class, 'destroy'])->name('trip_images.destroy');
 
 Route::get('/tripguide/create/{id}', [GuideTripController::class, 'create'])->name('tripguide.create');
 Route::post('/tripguide/store/{id}', [GuideTripController::class, 'store'])->name('tripguide.store');
+Route::delete('/tripguide/delete/{id}', [GuideTripController::class, 'destroy'])->name('tripguide.destroy');
 
 
 //tripimages start----------------------------
 //Route::resource('/tripimages', TripImagesController::class)->middleware(['auth', 'isAdmin']);
+//tripimages end----------------------------
+
+
+//tripimages start----------------------------
+Route::get('/contact',[EmailController::class,'contactForm']);
+Route::post('/contactMail',[EmailController::class,'contact'])->name('contact')->middleware('verified');
 //tripimages end----------------------------

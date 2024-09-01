@@ -69,8 +69,11 @@ class GuideTripController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy( $guideid,)
     {
-        //
+        $guide = guide_trip::where('guide_id', $guideid)->first();
+        $guide ->delete();
+        return redirect()->back();
+
     }
 }

@@ -74,8 +74,21 @@ class TripImagesController extends Controller
     }
 
 
-    public function destroy(trip_images $trip_images)
+    public function destroy($id)
     {
-        //
+        // Find the trip image by its ID
+        $tripImage = trip_images::find($id);
+
+        // Delete the image file from the server
+        if (file_exists(public_path($tripImage->image))) {
+            unlink(public_path($tripImage->image));
+        }
+
+        // Delete the image record from the database
+        $tripImage->delete();
+
+        // Redirect back to the trip details page with a success message
+        return redirect()->back()->with('success', 'Image deleted successfully.');
     }
+
 }
