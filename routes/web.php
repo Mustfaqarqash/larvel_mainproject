@@ -6,6 +6,7 @@ use App\Http\Controllers\guide_trips;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\GuideTripController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\TripImagesController;
@@ -84,7 +85,14 @@ Route::delete('/tripguide/delete/{id}', [GuideTripController::class, 'destroy'])
 //tripimages end----------------------------
 
 
-//tripimages start----------------------------
+//contact start----------------------------
 Route::get('/contact',[EmailController::class,'contactForm']);
 Route::post('/contactMail',[EmailController::class,'contact'])->name('contact')->middleware('verified');
-//tripimages end----------------------------
+//contact end----------------------------
+
+
+Route::get('/show/profile', [ProfileController::class, 'show'])->name('profile.show')->middleware(['auth']);
+Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update')->middleware(['auth']);
+
+
+
