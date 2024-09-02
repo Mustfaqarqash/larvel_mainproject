@@ -37,7 +37,8 @@
                             <td>{{ $contact->created_at->format('Y-m-d') }}</td>
                             <td>
 
-                                <button type="button" class="btn btn-danger" onclick="confirmDeletion(event, '{{ route('contacte.destroy', $contact->id) }}')">DELETE</button>
+
+                                <button type="button" class="btn btn-danger" onclick="confirmDeletion(event, '{{ route('contact.destroy', $contact->id) }}')">DELETE</button>
                             </td>
                             </tr>
                         @endforeach
