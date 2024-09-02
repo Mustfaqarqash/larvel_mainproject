@@ -8,6 +8,10 @@ use App\Models\trip;
 use App\Models\category;
 use App\Models\trip_images;
 use Illuminate\Http\Request;
+use App\Models\Booking;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\BookingConfirmation;
 
 class TripController extends Controller
 {
@@ -117,6 +121,81 @@ class TripController extends Controller
         $trip->delete();
         return to_route('trips.index');
     }
+
+
+
+    public function showBooking($tripid)
+    {
+        // Find the trip by ID
+        $trip = Trip::find($tripid);
+
+        // Get all the guide_trip records related to this trip
+        $tripGuids = Guide_Trip::where('trip_id', $tripid)->get();
+
+        // Initialize an empty array to hold the guide details
+        $guides = [];
+
+        // Loop through each guide_trip record
+        foreach ($tripGuids as $tripGuid) {
+            // Find the guide by its ID and add it to the $guides array
+            $guide = Guide::find($tripGuid->guide_id);
+            array_push($guides, $guide);
+        }
+
+        // Get all the images associated with the trip
+        $tripImages = Trip_Images::where('trip_id', $tripid)->get();
+
+        // Pass the trip, guides, and images data to the view
+        return view('dashboard/trips/show', [
+            'tripImages' => $tripImages,
+            'tripGuids' => $guides,
+            'trip' => $trip
+        ]);
+    }
+
+
+
+
+
+    public function book(Request $request, $tripid)
+    {
+        // Validate the incoming request data if needed
+        $request->validate([
+            // Add validation rules if needed
+        ]);
+
+        // Insert the booking data into the database
+        $booking = Booking::create([
+            'user_id' => Auth::id(), // Get the authenticated user's ID
+            'trip_id' => $tripid,    // Get the trip ID from the route
+            'status'  => 'inprogress', // Or you could set it as 'pending' initially
+        ]);
+
+        // Send a confirmation email to the user
+        $user = Auth::user();
+        Mail::to($user->email)->send(new BookingConfirmation($booking));
+
+        // Redirect or return a response
+        return redirect()->back()->with('success', 'please check your email to confirm your booking');
+    }
+
+
+
+    public function confirm($id)
+    {
+        try {
+            $booking = Booking::find($id);
+
+            $booking->update(['status' => 'completed']);
+
+            return redirect()->route('trips.showBooking', $booking->trip_id)->with('success', 'Your booking has been confirmed!');
+        } catch (\Exception $e) {
+
+            return redirect()->back()->with('error', 'An error occurred while confirming the booking:' . $e->getMessage());
+        }
+    }
+
+
     public function search(Request $request)
     {
         $request->validate([
@@ -141,4 +220,9 @@ class TripController extends Controller
             ]);
         }
     }
+
+
 }
+
+
+

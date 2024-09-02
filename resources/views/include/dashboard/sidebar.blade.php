@@ -52,7 +52,12 @@
                 <i class="mdi mdi-account-card-details menu-icon"></i>
             </a>
         </li>
-
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('booking.index') }}">
+                <span class="menu-title">bookings</span>
+                <i class="mdi mdi-account-card-details menu-icon"></i>
+            </a>
+        </li>
 
     </ul>
 </nav>

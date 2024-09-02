@@ -40,7 +40,8 @@
                 @endif
             @else
                 <li class="nav-item nav-profile dropdown">
-                    <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown"
+                       aria-expanded="false">
                         <div class="nav-profile-img">
                             <img src="/assets/images/faces/face1.jpg" alt="image">
                             <span class="availability-status online"></span>
@@ -72,11 +73,13 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"
+                   data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="mdi mdi-email-outline"></i>
                     <span class="count-symbol bg-warning"></span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                     aria-labelledby="messageDropdown">
                     <h6 class="p-3 mb-0">Messages</h6>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item preview-item">
@@ -93,24 +96,33 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
+                   data-bs-toggle="dropdown">
                     <i class="mdi mdi-bell-outline"></i>
-                    <span class="count-symbol bg-danger"></span>
+                    @if (App\Models\booking::all()->where('read', '=', '0')->count() > 0)
+                        <span class="count-symbol bg-danger"></span>
+                    @endif
                 </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                     aria-labelledby="notificationDropdown">
                     <h6 class="p-3 mb-0">Notifications</h6>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item preview-item">
-                        <div class="preview-thumbnail">
-                            <div class="preview-icon bg-success">
-                                <i class="mdi mdi-calendar"></i>
-                            </div>
-                        </div>
-                        <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                            <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
-                            <p class="text-gray ellipsis mb-0">Just a reminder that you have an event today</p>
-                        </div>
-                    </a>
+                    @foreach (App\Models\booking::all() as $booking)
+                        @if ($booking->read == 0)
+                            <a class="dropdown-item preview-item" href="{{ route('booking.show', $booking->id) }}">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-success">
+                                        <i class="mdi mdi-calendar"></i>
+                                    </div>
+                                </div>
+                                <div
+                                    class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                                    <h6 class="preview-subject font-weight-normal mb-1">New Booking</h6>
+                                    <p class="text-gray ellipsis mb-0">{{ $booking->user->email }}</p>
+                                </div>
+                            </a>
+                        @endif
+                    @endforeach
                     <!-- Additional notifications -->
                 </div>
             </li>
@@ -126,7 +138,8 @@
                 </a>
             </li>
         </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                data-toggle="offcanvas">
             <span class="mdi mdi-menu"></span>
         </button>
     </div>

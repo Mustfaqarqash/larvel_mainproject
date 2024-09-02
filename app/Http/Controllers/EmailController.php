@@ -23,7 +23,7 @@ class EmailController extends Controller
     //    Mail::to($toEmail)->send(new WellcomeEmail($massage,$subject));
     // }
     public function contactForm(){
-        return view('contacte');
+        return view('contact');
     }
     public function contact(Request $request){
         $request->validate([

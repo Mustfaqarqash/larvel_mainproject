@@ -34,6 +34,10 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
+        if($user->email != $request->input('email')){
+            $user->email_verified_at=null;
+            $user->save();
+        }
 
         // Validate the request
         $request->validate([

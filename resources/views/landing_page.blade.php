@@ -33,11 +33,6 @@
 <!-- Package End -->
 
 
-<!-- Booking Start -->
-@include("include/user_side/booking")
-<!-- Booking Start -->
-
-
 <!-- Process Start -->
 @include("include/user_side/process")
 <!-- Process Start -->

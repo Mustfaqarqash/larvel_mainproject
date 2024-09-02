@@ -125,13 +125,15 @@
                 @foreach($trips as $trip)
                     <div class="col-lg-4 col-md-6">
                         <div class="package-item">
-                            <div class="overflow-hidden">
-                                <!-- Correctly fetch the first image from the trip_images relationship -->
-                                @php
-                                    $firstImage = $trip->trip_images->first();
-                                @endphp
-                                <img class="img-fluid" src="{{ asset($firstImage ? $firstImage->image : 'default-trip.jpg') }}" alt="Trip Image">
-                            </div>
+                            <a href="{{ route('trips.showBooking', $trip->id) }}">
+                                <div class="overflow-hidden">
+                                    <!-- Correctly fetch the first image from the trip_images relationship -->
+                                    @php
+                                        $firstImage = $trip->trip_images->first();
+                                    @endphp
+                                    <img class="img-fluid" src="{{ asset($firstImage ? $firstImage->image : 'default-trip.jpg') }}" alt="Trip Image">
+                                </div>
+                            </a>
                             <div class="d-flex border-bottom">
                                 <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ $trip->location }}</small>
                                 <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>{{ $trip->start_at }} - {{ $trip->end_at }}</small>

@@ -12,23 +12,9 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $bookings = booking::all();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        return view('dashboard.bookings.index', compact('bookings'));
     }
 
     /**
@@ -36,7 +22,10 @@ class BookingController extends Controller
      */
     public function show(booking $booking)
     {
-        //
+
+        $booking->read = 1;
+        $booking->save();
+        return view('dashboard.bookings.view', compact('booking'));
     }
 
     /**
@@ -44,7 +33,7 @@ class BookingController extends Controller
      */
     public function edit(booking $booking)
     {
-        //
+        return view('dashboard.bookings.edit', compact('booking'));
     }
 
     /**
@@ -52,7 +41,13 @@ class BookingController extends Controller
      */
     public function update(Request $request, booking $booking)
     {
-        //
+        try{
+            $booking->update($request->all());
+            return redirect()->back() ->with('success', 'booking has been updated!');
+        }catch(\Exception $e){
+            return redirect()->back()->with('error', 'An error occurred while updating the booking:' . $e->getMessage());
+        }
+
     }
 
     /**
@@ -60,6 +55,31 @@ class BookingController extends Controller
      */
     public function destroy(booking $booking)
     {
-        //
+        try{
+            $booking->delete();
+            return redirect()->back()->with('success', 'booking has been deleted!');
+        }catch(\Exception $e){
+            return redirect()->back()->with('error', 'An error occurred while updating the booking:' . $e->getMessage());
+        }
+
+    }
+
+    public function accept(booking $booking,$id)
+    {
+        $booking = booking::find($id);
+        $booking->update(['accepted' => 1]);
+        return redirect()->back();
+    }
+    public function confirm(booking $booking,$id)
+    {
+        try {
+            $booking = Booking::find($id);
+
+            $booking->update(['status' => 'completed']);
+
+            return redirect()->back()->with('success', 'booking has been confirmed!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while confirming the booking:' . $e->getMessage());
+        }
     }
 }

@@ -15,6 +15,9 @@ use App\Http\Controllers\TripImagesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookingController;
+use App\Models\trip;
+
 
 Route::get('/', function () {
 return redirect()->route('home');
@@ -33,8 +36,18 @@ Route::get('/home',[HomeController::class,'index'])->name('home');
 //trips start --------------------------
 Route::resource('trips', TripController::class)->middleware(['auth' , 'isAdmin']);
 Route::post('/trips/search/', [TripController::class,'search'])->name('search_trips');
-
+Route::get('/trips/view/{id}', [TripController::class, 'showBooking'])->name('trips.showBooking');
 //trips end ----------------------------
+
+//Booking start --------------------------
+Route::put('/book/{id}', [TripController::class, 'book'])->name('book');
+Route::get('/bookings/{id}', [TripController::class, 'confirm'])->name('booking.confirm');
+
+Route::resource('booking', BookingController::class)->middleware(['auth' , 'isAdmin']);
+Route::get('/book/{id}', [BookingController::class, 'accept'])->name('booking.accept');
+Route::get('/book/{id}/confirm', [BookingController::class, 'confirm'])->name('book.confirm');
+
+//Booking end --------------------------
 
 //category start ----------------------------
 Route::resource('categories', CategoryController::class)->middleware(['auth' , 'isAdmin']);
@@ -91,7 +104,7 @@ Route::delete('/tripguide/delete/{id}', [GuideTripController::class, 'destroy'])
 //tripimages end----------------------------
 
 
-//contacte start----------------------------
+//contacte start---------------------------
 Route::get('/contacte',[EmailController::class,'contactForm']);
 Route::post('/contactMail',[EmailController::class,'contact'])->name('contacte')->middleware('verified');
     Route::resource('dash/contacte', ContactController::class)->middleware(['auth']);

@@ -10,8 +10,8 @@
                 <div class="navbar-nav ms-auto py-0">
                     <a href="{{ url('/') }}" class="nav-item nav-link {{ request()->is('/') ? 'active' : '' }}">Home</a>
                     <a href="{{ url('/about') }}" class="nav-item nav-link {{ request()->is('about') ? 'active' : '' }}">About</a>
-                    <a href="{{ url('/services') }}" class="nav-item nav-link {{ request()->is('services') ? 'active' : '' }}">Services</a>
-                    <a href="{{ url('/packages') }}" class="nav-item nav-link {{ request()->is('packages') ? 'active' : '' }}">Packages</a>
+                    <a href="{{ url('/service') }}" class="nav-item nav-link {{ request()->is('services') ? 'active' : '' }}">Services</a>
+
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0">
