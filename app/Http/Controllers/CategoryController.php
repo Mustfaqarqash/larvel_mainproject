@@ -107,9 +107,7 @@ $category->save();
 return redirect()->route('categories.index');
 }
 
-/**
-* Remove the specified resource from storage.
-*/
+
 public function destroy(Category $category)
 {
 // Delete the associated image file if it exists
