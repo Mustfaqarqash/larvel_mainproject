@@ -91,7 +91,7 @@
 
         <div class="container-xxl py-5">
                         <div class="text-center mb-4">
-                            <h1 class="mb-5"><span class="active">{{$cat_name->name}} </span>Trips</h1>
+                            <h1 class="mb-5"><span class="active">{{ isset($cat_name) && $cat_name->name ? $cat_name->name : 'Mostafa' }}</span>Trips</h1>
                         </div>
             <div class="container">
 

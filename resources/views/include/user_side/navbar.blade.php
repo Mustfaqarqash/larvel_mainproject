@@ -22,7 +22,7 @@
                             <a href="{{ url('/404') }}" class="dropdown-item">404 Page</a>
                         </div>
                     </div>
-                    <a href="{{ url('/contact') }}" class="nav-item nav-link {{ request()->is('contact') ? 'active' : '' }}">Contact</a>
+                    <a href="{{ url('/contacte') }}" class="nav-item nav-link {{ request()->is('contacte') ? 'active' : '' }}">Contact</a>
 
                     @guest
                         @if (Route::has('login'))

@@ -1,8 +1,8 @@
 @extends('layouts/user_side_master')
-@section('pagename', 'Contact')
+@section('pagename', 'Contacte')
 @section('Contact_active', 'active')
 @section('content')
-    <!-- Contact Start -->
+    <!-- Contacte Start -->
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
@@ -62,7 +62,7 @@
                                 {{ Session::get('error') }}
                             </div>
                         @endif
-                        <form action="{{ route('contact') }}" method="POST">
+                        <form action="{{ route('contacte') }}" method="POST">
                             @csrf
                             <div class="row g-3">
                                 <div class="col-md-6">
@@ -111,5 +111,5 @@
             </div>
         </div>
     </div>
-    <!-- Contact End -->
+    <!-- Contacte End -->
 @endsection

@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\guide_trips;
@@ -31,11 +32,14 @@ Route::get('/home',[HomeController::class,'index'])->name('home');
 
 //trips start --------------------------
 Route::resource('trips', TripController::class)->middleware(['auth' , 'isAdmin']);
+Route::post('/trips/search/', [TripController::class,'search'])->name('search_trips');
+
 //trips end ----------------------------
 
 //category start ----------------------------
 Route::resource('categories', CategoryController::class)->middleware(['auth' , 'isAdmin']);
 Route::get('/categories/view/{id}', [CategoryController::class, 'view'])->name('categoties');
+Route::post('/categories/search/', [CategoryController::class,'search'])->name('search');
 //category end ------------------------------
 
 //dashboard start----------------------------
@@ -44,6 +48,7 @@ Route::get('/dash',[DashboardController::class, 'index'] )->middleware(['isAdmin
 
 //guide start----------------------------
 Route::resource('/guides', GuideController::class)->middleware(['auth', 'isAdmin']);
+Route::post('/guides/search/', [GuideController::class,'search'])->name('search_guides');
 //guide end----------------------------
 
 //testimonials start----------------------------
@@ -86,10 +91,11 @@ Route::delete('/tripguide/delete/{id}', [GuideTripController::class, 'destroy'])
 //tripimages end----------------------------
 
 
-//contact start----------------------------
-Route::get('/contact',[EmailController::class,'contactForm']);
-Route::post('/contactMail',[EmailController::class,'contact'])->name('contact')->middleware('verified');
-//contact end----------------------------
+//contacte start----------------------------
+Route::get('/contacte',[EmailController::class,'contactForm']);
+Route::post('/contactMail',[EmailController::class,'contact'])->name('contacte')->middleware('verified');
+    Route::resource('dash/contacte', ContactController::class)->middleware(['auth']);
+//contacte end----------------------------
 
 
 Route::get('/show/profile', [ProfileController::class, 'show'])->name('profile.show')->middleware(['auth']);
@@ -98,4 +104,8 @@ Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('
 
 Route::get('/service' , [ServiceController::class , 'index'])->name('service.index');
 Route::get('/service/show' , [ServiceController::class , 'show'])->name('service.show');
+
+
+
+//Route::get('dashboard/categories/index', [CategoryController::class, 'index'])->name('categories.index');
 

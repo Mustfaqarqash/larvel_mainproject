@@ -3,6 +3,25 @@
 
 @section('content')
 <div class="card">
+    <form action="{{ route('search_guides') }}" method="post" class="container mt-4">
+        @csrf
+        <div class="form-group">
+            <label for="q" class="form-label">Search by guides name</label>
+
+            <div class="input-group" style="margin-top: 10px">
+
+                <input type="text" id="q" name="q" class="form-control" placeholder="Insert guides name" style="border: rgb(204, 204, 204) solid 1px">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    @if(session('static'))
+        <div class="alert alert-info">
+            {{ session('static') }}
+        </div>
+    @endif
     <div class="card-body">
         <h4 class="card-title">Guides List</h4>
         <a href="{{ route('guides.create') }}" class="btn btn-success mb-3">Add New Guide</a>

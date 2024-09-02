@@ -117,4 +117,28 @@ class TripController extends Controller
         $trip->delete();
         return to_route('trips.index');
     }
+    public function search(Request $request)
+    {
+        $request->validate([
+            'q' => 'required',
+        ]);
+
+        $q = $request->q;
+
+        $alltrips = trip::all();
+
+        $filtertrips = trip::where('name', 'like', '%' . $q . '%')->get();
+
+        if ($filtertrips->count()) {
+            return view('dashboard/trips/index', [
+                'trips' => $filtertrips,
+            ]);
+        } else {
+            return redirect()->route('trips.index')->with([
+
+                'static' => 'No trips found'
+
+            ]);
+        }
+    }
 }

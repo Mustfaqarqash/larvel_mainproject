@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 // use App\Mail\WellcomeEmail;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Contacte;
 use App\Mail\contact;
+use App\Models\User;
 
 class EmailController extends Controller
 {
@@ -19,7 +23,7 @@ class EmailController extends Controller
     //    Mail::to($toEmail)->send(new WellcomeEmail($massage,$subject));
     // }
     public function contactForm(){
-        return view('contact');
+        return view('contacte');
     }
     public function contact(Request $request){
         $request->validate([
@@ -27,6 +31,14 @@ class EmailController extends Controller
             'email' => 'required|email',
             'subject' => 'required',
             'message' => 'required',
+        ]);
+//         dd(auth()->user()->id);
+        Contacte::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'subject'=>$request->subject,
+            'message'=>$request->message,
+            'user_id'=>auth()->user()->id
         ]);
         $sender=$request->email;
         $messageContent=$request->message;

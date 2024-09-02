@@ -1,7 +1,25 @@
 @extends("layouts.dashboard_master")
 @section("headTitle", "One")
 @section("content")
+    <form action="{{ route('search_trips') }}" method="post" class="container mt-4">
+        @csrf
+        <div class="form-group">
+            <label for="q" class="form-label">Search by trip name</label>
 
+            <div class="input-group" style="margin-top: 10px">
+
+                <input type="text" id="q" name="q" class="form-control" placeholder="Insert trip name" style="border: rgb(204, 204, 204) solid 1px">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    @if(session('static'))
+        <div class="alert alert-info">
+            {{ session('static') }}
+        </div>
+    @endif
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="title-1">Trips</h2>
