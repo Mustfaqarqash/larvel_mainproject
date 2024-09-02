@@ -23,4 +23,8 @@ class trip extends Model
     public function category(){
         return $this->belongsTo(category::class,'cat_id');
     }
+    public function trip_images(){
+        return $this->hasMany(trip_images::class,'trip_id');
+    }
+
 }

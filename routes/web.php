@@ -7,6 +7,7 @@ use App\Http\Controllers\GuideController;
 use App\Http\Controllers\GuideTripController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\TripImagesController;
@@ -95,4 +96,6 @@ Route::get('/show/profile', [ProfileController::class, 'show'])->name('profile.s
 Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update')->middleware(['auth']);
 
 
+Route::get('/service' , [ServiceController::class , 'index'])->name('service.index');
+Route::get('/service/show' , [ServiceController::class , 'show'])->name('service.show');
 
