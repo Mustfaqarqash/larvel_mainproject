@@ -102,7 +102,7 @@
 @section('headTitle', 'One')
 @section('content')
 
-    <div class="container">
+    <div class="container card p-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="title-1">Trips</h2>
             <a href="{{ route('trips.create') }}">
@@ -112,8 +112,7 @@
             </a>
         </div>
 
-        <div class="card">
-            <div class="card-body">
+
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="table-responsive table--no-card m-b-40">
@@ -148,29 +147,31 @@
 
 
                                         <td>
-                                            <a href="{{ route('trips.edit', $trip->id) }}">
+                                            <a href="{{ route('trips.edit', $trip->id) }}"  title="edit">
                                                 <button type="submit" class="btn btn-outline-info"><i
                                                         class="mdi mdi-table-edit"></i></button>
                                             </a>
+
+                                            <a href="{{ route('tripimages.create', $trip->id) }}" title="create">
+                                                <button type="submit" class="btn btn-outline-success"><i
+                                                        class="mdi mdi-tooltip-image" ></i></button>
+                                            </a>
+                                            <a href="{{ route('tripguide.create', $trip->id) }}" title="Add guide">
+                                                <button type="submit" class="btn btn-outline-primary"><i
+                                                        class="mdi mdi-account" ></i></button>
+                                            </a>
+                                            <a href="{{ route('trips.showadmin', $trip->id) }}" title="view">
+                                                <button type="submit" class="btn btn-outline-info"><i
+                                                        class="mdi mdi-information-outline" ></i></button>
+                                            </a>
+
                                             <form action="{{ route('trips.destroy', $trip->id) }}" method="POST"
-                                                  style="display:inline;">
+                                                  style="display:inline;" title="delete">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-outline-danger"><i
-                                                        class="mdi mdi-delete"></i></button>
+                                                        class="mdi mdi-delete" ></i></button>
                                             </form>
-                                            <a href="{{ route('tripimages.create', $trip->id) }}">
-                                                <button type="submit" class="btn btn-outline-success"><i
-                                                        class="mdi mdi-tooltip-image"></i></button>
-                                            </a>
-                                            <a href="{{ route('tripguide.create', $trip->id) }}">
-                                                <button type="submit" class="btn btn-outline-primary"><i
-                                                        class="mdi mdi-account"></i></button>
-                                            </a>
-                                            <a href="{{ route('trips.show', $trip->id) }}">
-                                                <button type="submit" class="btn btn-outline-info"><i
-                                                        class="mdi mdi-information-outline"></i></button>
-                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -180,8 +181,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+
 
 
 

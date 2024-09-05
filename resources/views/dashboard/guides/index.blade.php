@@ -2,11 +2,36 @@
 @section("headTitle", "Guides")
 
 @section('content')
-<div class="card">
-    <form action="{{ route('search_guides') }}" method="post" class="container mt-4">
+<div class="container card p-5">
+    @if(session('static'))
+        <div class="alert alert-info">
+            {{ session('static') }}
+        </div>
+    @endif
+    <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="title-1">Guides</h2>
+            <a href="{{ route('guides.create')  }}">
+                <button type="button" class="btn btn-primary">
+                    <i class="zmdi zmdi-plus"></i>Add New Guide
+                </button>
+            </a>
+        </div>
+        
+        <!-- <a href="{{ route('guides.create') }}" class="btn btn-primary">Add New Guide</a> -->
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if($guides->isEmpty())
+            <p>No guides found.</p>
+        @else
+
+        <form action="{{ route('search_guides') }}" method="post" class="container mt-4">
         @csrf
         <div class="form-group">
-            <label for="q" class="form-label">Search by guides name</label>
+           
 
             <div class="input-group" style="margin-top: 10px">
 
@@ -17,25 +42,8 @@
             </div>
         </div>
     </form>
-    @if(session('static'))
-        <div class="alert alert-info">
-            {{ session('static') }}
-        </div>
-    @endif
-    <div class="card-body">
-        <h4 class="card-title">Guides List</h4>
-        <a href="{{ route('guides.create') }}" class="btn btn-success mb-3">Add New Guide</a>
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if($guides->isEmpty())
-            <p>No guides found.</p>
-        @else
-            <table class="table table-bordered">
-                <thead>
+        <table class="table table-bordered bg-white">
+        <thead>
                     <tr>
                         <th>Image</th>
                         <th>Name</th>
@@ -58,9 +66,10 @@
                             <td>{{ $guide->age }}</td>
                             <td>{{ $guide->gender }}</td>
                             <td>
-                                <a href="{{ route('guides.show', $guide->id) }}" class="btn btn-outline-primary"><i class="mdi mdi-information-outline"></i></a>
-                                <a href="{{ route('guides.edit', $guide->id) }}" class="btn btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
-                                <form action="{{ route('guides.destroy', $guide->id) }}" method="POST" style="display:inline-block;">
+                               
+                                <a href="{{ route('guides.edit', $guide->id) }}" class="btn btn-outline-info" title="edit"><i class="mdi mdi-table-edit"></i></a>
+                                <a href="{{ route('guides.show', $guide->id) }}" class="btn btn-outline-primary"title="view"><i class="mdi mdi-information-outline"></i></a>
+                                <form action="{{ route('guides.destroy', $guide->id) }}" method="POST" style="display:inline-block;" title="delete">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-outline-danger"><i class="mdi mdi-delete"></i></button>
@@ -72,5 +81,6 @@
             </table>
         @endif
     </div>
+</div>
 </div>
 @endsection

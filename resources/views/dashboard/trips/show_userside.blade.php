@@ -1,54 +1,109 @@
-@extends("layouts/user_side_master")
-@section("pagename" , "Trip Details")
-@section("login_active" , "active")
-@section("content")
-    <!-- Trip Details Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="bg-light p-5 rounded">
-                        <h1 class="text-center mb-4">{{ $trip->name }}</h1>
+@extends('layouts.dashboard_master')
+@section("headTitle", "Show Trip Info")
 
-                        <div class="mb-4 text-center text-muted">
-                            <span class="me-2"><strong>Start Date:</strong> {{ date('Y/m/d', strtotime($trip->start_at)) }}</span> |
-                            <span class="ms-2"><strong>End Date:</strong> {{ date('Y/m/d', strtotime($trip->end_at)) }}</span>
-                        </div>
+@section('content')
+    <style>
+        .fixed-size-img {
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
 
-                        <div class="row mb-4">
-                            @foreach($tripImages as $tripImage)
-                                <div class="col-6">
-                                    <img src="{{ asset($tripImage->image) }}" class="img-fluid mb-3 w-100 rounded" alt="Trip Image" style="height: 200px; object-fit: cover;">
+    <div class="card">
+        <div class="card-body">
+            <!-- Recent Updates Section -->
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ $trip->name }}</h4>
+                            <div class="d-flex mb-3">
+                                <div class="d-flex align-items-center text-muted font-weight-light">
+                                    <span>Start: {{ date('y/m/d', strtotime($trip->start_at)) }}</span>
                                 </div>
-                            @endforeach
-                        </div>
-
-                        <h5 class="mb-3">Description:</h5>
-                        <p>{{ $trip->description }}</p>
-
-                        <h5 class="mb-3">Guide Information:</h5>
-                        <div class="d-flex align-items-center mb-4">
-                            <img src="{{ asset($tripGuids->image) }}" class="img-fluid rounded-circle me-3" alt="Guide Image" style="width: 60px; height: 60px;">
-                            <div>
-                                <p class="mb-1"><strong>{{ $tripGuids->name }}</strong></p>
-                                <p class="mb-0">{{ $tripGuids->description }}</p>
-                                <small class="text-muted">{{ $tripGuids->gender }}, {{ $tripGuids->age }} years old</small>
+                                <div class="d-flex align-items-center text-muted font-weight-light">
+                                    <span>| End: {{ date('y/m/d', strtotime($trip->end_at)) }}</span>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="{{ route('guides.index') }}" class="btn btn-light me-2">Back to List</a>
-                            <a href="{{ route('trip.edit', $trip->id) }}" class="btn btn-warning me-2">Edit</a>
-                            <form action="{{ route('trip.destroy', $trip->id) }}" method="POST" class="d-inline-block">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
+                            <!-- Trip Images Section -->
+                            <div class="row">
+                                <div class="col-6 pe-1">
+                                    @foreach($tripImages->take(2) as $tripimag)
+                                        <div class="position-relative">
+                                            <img src="{{ asset($tripimag->image) }}" class="img-fluid mb-2 w-100 rounded fixed-size-img" alt="Trip Image">
+                                            <form action="{{ route('trip_images.destroy', $tripimag->id) }}" method="POST" class="position-absolute top-0 end-0 me-2 mt-2">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="col-6 ps-1">
+                                    @foreach($tripImages->skip(2)->take(2) as $tripimag)
+                                        <div class="position-relative">
+                                            <img src="{{ asset($tripimag->image) }}" class="img-fluid mb-2 w-100 rounded fixed-size-img" alt="Trip Image">
+                                            <form action="{{ route('trip_images.destroy', $tripimag->id) }}" method="POST" class="position-absolute top-0 end-0 me-2 mt-2">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- Recent Tickets Section -->
+            <div class="row">
+                <div class="col-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Recent Tickets</h4>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th> Assignee </th>
+                                        <th> Subject </ th>
+                                        <th> Gender </th>
+                                        <th> Age </th>
+                                        <th> Action </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($tripGuids as $tripGuid)
+                                    <tr>
+
+                                            <td>
+                                                <img src="{{ asset($tripGuid->image) }}" class="img-fluid rounded-circle me-2" alt="Guide Image" style="width: 40px; height: 40px;">
+                                                {{ $tripGuid->name }}
+                                            </td>
+                                            <td> {{ $tripGuid->description }} </td>
+                                            <td> {{ $tripGuid->gender }} </td>
+                                            <td> {{ $tripGuid->age }} </td>
+                                            <td class="multi">
+                                                <form action="{{route('tripguide.destroy' , $tripGuid->id )}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger btn-sm"  type="submit"> delete </button>
+                                                </form>
+                                            </td>
+                                    </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
-    <!-- Trip Details End -->
 @endsection

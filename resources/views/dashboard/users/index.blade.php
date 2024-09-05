@@ -2,10 +2,19 @@
 @section("headTitle", "Users")
 
 @section('content')
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title">users List</h4>
-        <a href="{{ route('users.create') }}" class="btn btn-success mb-3">Add New user</a>
+<div class="container card p-5">
+<div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="title-1">Users</h2>
+            <a href="{{ route('users.create') }}">
+                <button type="button" class="btn btn-primary">
+                    <i class="zmdi zmdi-plus"></i> Add New user
+                </button>
+            </a>
+        </div>
+        <div class="row">
+        <div class="col-lg-12">
+
+
         @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -15,17 +24,18 @@
         @if($users->isEmpty())
             <p>No user found.</p>
         @else
-            <table class="table table-bordered">
-                <thead>
+        <div class="table-responsive table--no-card m-b-40">
+            <table class="table table-bordered bg-white">
+                <thead class="thead-light">
                     <tr>
-                        <th>iamge</th>
-                        <th>id</th>
-                        <th>name</th>
-                        <th>email</th>
+                        <th>Image</th>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
 
-                        <th>phone</th>
+                        <th>Phone</th>
                         <!-- <th>image</th> -->
-                        <th>usertype</th>
+                        <th>Usertype</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,7 +43,7 @@
                         <tr>
                             <td>
                                         @if($user->image)
-                                <img src="{{ asset($user->image) }}" alt="{{ $user->name }}" class="img-fluid" width="100">
+                                <img src="{{ asset('storage/'. $user->image) }}" alt="{{ $user->name }}" class="img-fluid" width="100">
                                         @else
                                 <p>No Image</p>
                                        @endif
@@ -48,12 +58,12 @@
 
                             <td>
 
-                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-info" title="edit"><i class="mdi mdi-table-edit"></i></a>
                                 <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                    style="display:inline-block;">
+                                    style="display:inline-block;" title="delete">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm"  onclick="confirmDeletion(event, '{{ route('users.destroy', $user->id) }}')">Delete</button>
+                                    <button type="submit"  class="btn btn-outline-danger"  onclick="confirmDeletion(event, '{{ route('users.destroy', $user->id) }}')"><i class="mdi mdi-delete"></i></button>
                                 </form>
                             </td>
                         </tr>
@@ -62,6 +72,8 @@
             </table>
         @endif
     </div>
+</div>
+</div>
 </div>
 
 <div id="confirmationModal"

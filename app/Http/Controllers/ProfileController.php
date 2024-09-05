@@ -21,9 +21,9 @@ class ProfileController extends Controller
 
 
 
-    public function edit(User $user)
+    public function showadmin(User $user)
     {
-        //
+        return view("dashboard/admin_profile",['user'=>$user]);
     }
 
 

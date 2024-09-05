@@ -1,11 +1,11 @@
 <!-- Navbar -->
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo" href="index.html">
-            <img src="/assets/images/logo.svg" alt="logo" />
+        <a class="navbar-brand brand-logo" href="">
+            <img src="{{asset('logo.png')}}" alt="logo"  width="50px" height="150px"/>
         </a>
         <a class="navbar-brand brand-logo-mini" href="index.html">
-            <img src="/assets/images/logo-mini.svg" alt="logo" />
+            <img src="{{asset('placeholder.png')}}" alt="logo"  width="50"   height="150" />
         </a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -43,7 +43,7 @@
                     <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown"
                        aria-expanded="false">
                         <div class="nav-profile-img">
-                            <img src="/assets/images/faces/face1.jpg" alt="image">
+                            <img src="{{asset('storage/' . auth()->user()->image)}}" alt="image">
                             <span class="availability-status online"></span>
                         </div>
                         <div class="nav-profile-text">
@@ -51,8 +51,8 @@
                         </div>
                     </a>
                     <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                        <a class="dropdown-item" href="#">
-                            <i class="mdi mdi-cached me-2 text-success"></i> Activity Log
+                        <a class="dropdown-item" href="{{ route('profile.showadmin') }}">
+                            <i class="mdi mdi-cached me-2 text-success"></i> profile
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
@@ -73,11 +73,11 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"
-                   data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="mdi mdi-email-outline"></i>
-                    <span class="count-symbol bg-warning"></span>
-                </a>
+{{--                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"--}}
+{{--                   data-bs-toggle="dropdown" aria-expanded="false">--}}
+{{--                    <i class="mdi mdi-email-outline"></i>--}}
+{{--                    <span class="count-symbol bg-warning"></span>--}}
+{{--                </a>--}}
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                      aria-labelledby="messageDropdown">
                     <h6 class="p-3 mb-0">Messages</h6>
@@ -127,16 +127,16 @@
                 </div>
             </li>
 
-            <li class="nav-item nav-logout d-none d-lg-block">
-                <a class="nav-link" href="#">
-                    <i class="mdi mdi-power"></i>
-                </a>
-            </li>
-            <li class="nav-item nav-settings d-none d-lg-block">
-                <a class="nav-link" href="#">
-                    <i class="mdi mdi-format-line-spacing"></i>
-                </a>
-            </li>
+{{--            <li class="nav-item nav-logout d-none d-lg-block">--}}
+{{--                <a class="nav-link" href="#">--}}
+{{--                    <i class="mdi mdi-power"></i>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--            <li class="nav-item nav-settings d-none d-lg-block">--}}
+{{--                <a class="nav-link" href="#">--}}
+{{--                    <i class="mdi mdi-format-line-spacing"></i>--}}
+{{--                </a>--}}
+{{--            </li>--}}
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
                 data-toggle="offcanvas">

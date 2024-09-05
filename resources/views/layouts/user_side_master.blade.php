@@ -23,8 +23,13 @@
 
                 <a href="{{ url('/service') }}" class="nav-item nav-link {{ request()->is('service') ? 'active' : '' }}">Services</a>
 
+                <a href="{{ url('/guidesview') }}"
+                class="nav-item nav-link {{ request()->is('services') ? 'active' : '' }}">Guides</a>
 
                 <a href="{{ url('/contacte') }}" class="nav-item nav-link {{ request()->is('contacte') ? 'active' : '' }}">Contact</a>
+
+                <a href="{{ url('/apoutus') }}"
+                   class="nav-item nav-link {{ request()->is('About_active') ? 'active' : '' }}">About Us</a>
 
                 @guest
                     @if (Route::has('login'))
@@ -54,6 +59,14 @@
                                onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
+                            </a>
+                            @if(Auth()->user()->usertype == "admin")
+                                <a class="dropdown-item" href="{{ route('dashboard') }}">
+                                    {{ __('dashboard') }}
+                                </a>
+                            @endif
+                            <a class="dropdown-item" href="{{ route('bookingHistory.index') }}">
+                                {{ __('booking History') }}
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf

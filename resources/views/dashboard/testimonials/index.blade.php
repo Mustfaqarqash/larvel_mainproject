@@ -3,10 +3,10 @@
 @section('headTitle', 'Categories')
 
 @section('content')
-    <div class="container">
+    <div class="container card p-5">
 
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="title-1">testimonial</h2>
+            <h2 class="title-1">Testimonials</h2>
             {{-- <a href="{{ route('categories.create') }}">
                 <button type="button" class="btn btn-primary">
                     <i class="zmdi zmdi-plus"></i> Add New Category
@@ -47,7 +47,7 @@
                                         <button type="button" class="btn btn-secondary">Edit</button>
                                     </a>
                                     --}}
-                                    <button type="button" class="btn btn-danger" onclick="confirmDeletion(event, '{{ route('testimonials.destroy', $testimonial->id) }}')">DELETE</button>
+                                    <button type="button" title="delete" class="btn btn-outline-danger" onclick="confirmDeletion(event, '{{ route('testimonials.destroy', $testimonial->id) }}')"><i class="mdi mdi-delete"></i></button>
                                 </td>
                             </tr>
                         @endforeach

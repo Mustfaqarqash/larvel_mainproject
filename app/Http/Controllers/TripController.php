@@ -222,6 +222,38 @@ class TripController extends Controller
     }
 
 
+
+
+    public function  showadmin($tripid){
+        // Find the trip by ID
+        $trip = Trip::find($tripid);
+
+        // Get all the guide_trip records related to this trip
+        $tripGuids = Guide_Trip::where('trip_id', $tripid)->get();
+
+        // Initialize an empty array to hold the guide details
+        $guides = [];
+
+        // Loop through each guide_trip record
+        foreach ($tripGuids as $tripGuid) {
+            // Find the guide by its ID and add it to the $guides array
+            $guide = Guide::find($tripGuid->guide_id);
+            array_push($guides, $guide);
+        }
+
+        // Get all the images associated with the trip
+        $tripImages = Trip_Images::where('trip_id', $tripid)->get();
+
+        // Pass the trip, guides, and images data to the view
+        return view('dashboard/trips/show_userside', [
+            'tripImages' => $tripImages,
+            'tripGuids' => $guides,
+            'trip' => $trip
+        ]);
+
+    }
+
+
 }
 
 

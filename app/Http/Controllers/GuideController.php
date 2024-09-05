@@ -48,6 +48,18 @@ class GuideController extends Controller
         return view('dashboard/guides.show', compact('guide'));
     }
 
+    public function view()
+    {
+        $guides = Guide::all();
+        return view('home.guidesview', compact('guides'));
+    }
+
+    public function anotherPage($id) {
+        $guide = Guide::findOrFail($id); 
+        return view('home.guide', ['id' => $id ,'guide' =>$guide]);
+    }
+    
+
     public function edit(Guide $guide)
     {
         return view('dashboard/guides.edit', compact('guide'));
@@ -92,29 +104,5 @@ class GuideController extends Controller
 
         return redirect()->route('guides.index')
             ->with('success', 'Guide deleted successfully.');
-    }
-    public function search(Request $request)
-    {
-        $request->validate([
-            'q' => 'required',
-        ]);
-
-        $q = $request->q;
-
-        $guides = Guide::all();
-
-        $filterguides = Guide::where('name', 'like', '%' . $q . '%')->get();
-
-        if ($filterguides->count()) {
-            return view('dashboard/guides/index', [
-                'guides' => $filterguides,
-            ]);
-        } else {
-            return redirect()->route('guides.index')->with([
-
-                'static' => 'No guides found'
-
-            ]);
-        }
     }
 }

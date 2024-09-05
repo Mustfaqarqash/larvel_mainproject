@@ -3,9 +3,16 @@
 @section('headTitle', 'Bookings')
 
 @section('content')
-    <div class="card">
-        <div class="card-body">
-            <h1>Bookings</h1>
+<div class="container card p-5">
+<div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="title-1">Bookings</h2>
+         
+        </div>
+
+        <div class="row">
+        <div class="col-lg-12">
+        <div class="table-responsive table--no-card m-b-40">
+         
             @if ($bookings->isEmpty())
                 <p>No booking found.</p>
             @else
@@ -18,8 +25,8 @@
                         {{ Session::get('error') }}
                     </div>
                 @endif
-                <table class="table-responsive table--no-card m-b-40 table table-bordered">
-                    <thead>
+                <table class="table table-bordered bg-white">
+                    <thead class="thead-light">
                         <tr>
                             <th>Booking ID</th>
                             <th>name</th>
@@ -46,22 +53,23 @@
                                     <td>pending</td>
                                 @endif
                                 <td>
-                                    <div class="container d-flex justify-content-center flex-wrap">
-                                        <a href="{{ route('booking.show', $booking->id) }}" class="btn btn-primary btn-sm">
-                                            View</a>
+                                    
+                                        
                                         <a href="{{ route('booking.edit', $booking->id) }}"
-                                            class="btn btn-warning btn-sm">Edit</a>
+                                            class="btn btn-outline-info" title="edit"><i class="mdi mdi-table-edit"></i></a>
+                                            <a href="{{ route('booking.show', $booking->id) }}" class="btn btn-outline-primary" title="view">
+                                            <i class="mdi mdi-information-outline" ></i></a>
                                         <form action="{{ route('booking.destroy', $booking->id) }}" method="POST"
-                                            style="display:inline-block;">
+                                            style="display:inline-block;" title="delete">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="confirmDeletion(event, '{{ route('booking.destroy', $booking->id) }}')">Delete</button>
+                                            <button type="submit" class="btn btn-outline-danger" 
+                                                onclick="confirmDeletion(event, '{{ route('booking.destroy', $booking->id) }}')"><i class="mdi mdi-delete"></i></button>
                                         </form>
-                                        <a href="{{ route('book.confirm', $booking->id) }}" class="btn btn-success btn-sm">
-                                            Confirm </a>
-                                        <a href="{{ route('booking.accept', $booking->id) }}"
-                                            class="btn btn-success btn-sm"> Accept</a>
+                                        <a href="{{ route('book.confirm', $booking->id) }}" class="btn btn-outline-warning" title="confirm">
+                                        <i class="mdi mdi-checkbox-marked-circle-outline"></i> 
+                                       </a>
+                                        <a href="{{ route('booking.accept', $booking->id) }}" class="btn btn-outline-success" title="accept">   <i class="mdi mdi-checkbox-multiple-marked-circle-outline"></i></a>
                                     </div>
                                 </td>
                         @endforeach
@@ -69,6 +77,8 @@
                 </table>
             @endif
         </div>
+    </div>
+    </div>
     </div>
 
 @endsection

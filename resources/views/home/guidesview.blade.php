@@ -1,12 +1,17 @@
+@extends("layouts/user_side_master")
+
+@section("pagename" , "Guides")
+
+@section("content")
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 class="section-title bg-white text-center text-primary px-3">Travel Guide</h6>
             <h1 class="mb-5">Meet Our Guide</h1>
         </div>
-        <div class="row g-4">
-            @foreach($allguides as $guide)
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            @foreach($guides as $guide)
+            <div class="col wow fadeInUp" data-wow-delay="0.1s">
                 <a href="{{ url('guide/' . $guide->id) }}">
                     <div class="team-item">
                         <div class="overflow-hidden">
@@ -25,8 +30,7 @@
                 </a>
                 </div>
             @endforeach
-
-
         </div>
     </div>
 </div>
+@endsection
