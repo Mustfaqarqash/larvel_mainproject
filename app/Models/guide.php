@@ -10,15 +10,11 @@ class guide extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'image',
-        'description',
-        'age',
-        'gender',
+        'name', 'image', 'description', 'age', 'gender'
     ];
 
-    public function trips()
+    public function ratings()
     {
-        return $this->belongsToMany(Trip::class, 'guide_trips');
+        return $this->hasMany(guide_rating::class);
     }
 }

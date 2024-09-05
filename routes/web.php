@@ -1,8 +1,11 @@
 <?php
+
+use App\Http\Controllers\BookingHistoryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\GuideRatingController;
 use App\Http\Controllers\guide_trips;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\GuideTripController;
@@ -62,6 +65,9 @@ Route::get('/dash',[DashboardController::class, 'index'] )->middleware(['isAdmin
 //guide start----------------------------
 Route::resource('/guides', GuideController::class)->middleware(['auth', 'isAdmin']);
 Route::post('/guides/search/', [GuideController::class,'search'])->name('search_guides');
+Route::get('/guidesview',[GuideController::class,'view']);
+Route::get('/guide/{id}/', [GuideController::class, 'anotherPage'])->name('home.guide');
+Route::post('/guides/{id}/rate', [GuideRatingController::class, 'store'])->name('guides.rate');
 //guide end----------------------------
 
 //testimonials start----------------------------
@@ -118,7 +124,7 @@ Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('
 Route::get('/service' , [ServiceController::class , 'index'])->name('service.index');
 Route::get('/service/show' , [ServiceController::class , 'show'])->name('service.show');
 
-
+Route::resource('bookingHistory', BookingHistoryController::class)->middleware(['auth']);
 
 //Route::get('dashboard/categories/index', [CategoryController::class, 'index'])->name('categories.index');
 

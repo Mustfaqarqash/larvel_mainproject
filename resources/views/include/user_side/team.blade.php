@@ -7,9 +7,10 @@
         <div class="row g-4">
             @foreach($allguides as $guide)
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <a href="{{ url('guide/' . $guide->id) }}">
                     <div class="team-item">
                         <div class="overflow-hidden">
-                            <img class="img-fluid" src="{{asset($guide->image)}}" alt="">
+                            <img class="img-fluid fixed-size" src="{{asset($guide->image)}}" style="width: 300px; height: 300px;" alt="Image">
                         </div>
                         <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
                             <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -21,6 +22,7 @@
                             <small>{{$guide->description}}</small>
                         </div>
                     </div>
+                </a>
                 </div>
             @endforeach
 

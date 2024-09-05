@@ -32,4 +32,64 @@
     <link href="{{asset("css/style.css")}}" rel="stylesheet">
 </head>
 
+<style>
+    .star-rating {
+        display: flex;
+        font-size: 2em;
+        direction: ltr; /* Ensure stars are ordered from left to right */
+        justify-content: center;
+        position: relative; /* Make the parent element relative for absolute positioning */
+        margin-bottom: 1em;
+    }
+
+    .star-rating input {
+        display: none;
+    }
+
+    .star-rating label {
+        color: #ddd;
+        cursor: pointer;
+        transition: color 0.2s ease-in-out;
+    }
+
+    .star-rating input:checked ~ label {
+        color: gold;
+    }
+
+    .star-rating input:checked ~ input:checked ~ label {
+        color: gold;
+    }
+
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+        color: gold;
+    }
+
+    .submit-rating-button {
+        position: absolute; /* Position the button absolutely within the star-rating container */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0; /* Make the button invisible but still clickable */
+        z-index: -1; /* Place the button behind the stars */
+        cursor: pointer; /* Ensure the button remains clickable */
+        background: transparent; /* Remove background if needed */
+    }
+
+    .rating-display {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5em;
+        margin-top: 1em;
+    }
+
+    .rating-display span {
+        margin-left: 0.5em;
+        color: gold;
+        font-size: 2em;
+    }
+</style>
+
 <body>
