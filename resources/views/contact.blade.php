@@ -1,6 +1,6 @@
 @extends('layouts/user_side_master')
-@section('pagename', 'Contacte')
-@section('Contact_active', 'active')
+@section('pagename', 'Contacte us')
+@section('hero', 'Get in Touch with Us to Start Your Next Adventure')
 @section('content')
     <!-- Contacte Start -->
     <div class="container-xxl py-5">
@@ -12,8 +12,8 @@
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <h5>Get In Touch</h5>
-                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et
-                        eos</p>
+                    <p class="mb-4">Reach Out Today and Let’s Plan Your Perfect Adventure
+                    </p>
                     <div class="d-flex align-items-center mb-4">
                         <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary"
                              style="width: 50px; height: 50px;">
@@ -41,7 +41,7 @@
                         </div>
                         <div class="ms-3">
                             <h5 class="text-primary">Email</h5>
-                            <p class="mb-0">info@example.com</p>
+                            <p class="mb-0">quickjourney@gmail.com</p>
                         </div>
                     </div>
                 </div>

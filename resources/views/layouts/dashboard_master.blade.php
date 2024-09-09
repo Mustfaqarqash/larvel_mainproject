@@ -14,9 +14,10 @@
             <div class="content-wrapper">
                 <div class="page-header">
                     <h3 class="page-title">
+                        <a href="{{route('dashboard')}}">
                         <span class="page-title-icon bg-gradient-primary text-white me-2">
                             <i class="mdi mdi-home"></i>
-                        </span> @yield("headTitle" , "mustafa")
+                            </a>
                     </h3>
                     <nav aria-label="breadcrumb">
                         <ul class="breadcrumb">

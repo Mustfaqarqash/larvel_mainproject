@@ -42,6 +42,8 @@ Route::resource('trips', TripController::class)->middleware(['auth' , 'isAdmin']
 Route::post('/trips/search/', [TripController::class,'search'])->name('search_trips');
 
 Route::get('/trips/view/admin/{id}', [TripController::class, 'showadmin'])->name('trips.showadmin');
+Route::post('/trips/{trip}/feedback', [TripController::class, 'storeFeedback'])->name('trips.storeFeedback');
+
 
 //trips end ----------------------------
 
@@ -116,7 +118,9 @@ Route::delete('/tripguide/delete/{id}', [GuideTripController::class, 'destroy'])
 //contacte start---------------------------
 Route::get('/contacte',[EmailController::class,'contactForm']);
 Route::post('/contactMail',[EmailController::class,'contact'])->name('contacte')->middleware('verified');
-    Route::resource('dash/contacte', ContactController::class)->middleware(['auth']);
+Route::resource('dash/contacte', ContactController::class)->middleware(['auth']);
+Route::delete('/contacte/delete/{id}', [ContactController::class, 'destroy'])->name('contact.destroy')->middleware(['auth', 'isAdmin']);;
+
 //contacte end----------------------------
 
 //apout us page start

@@ -28,8 +28,8 @@
                             <input type="file" name="image" id="fileUpload" class="form-control" value="{{ old('image', $category->image) }}">
                         </div>
 
-                        <button type="submit" class="btn btn-gradient-primary me-2">Submit update</button>
-                        <button class="btn btn-light">Cancel</button>
+                        <button type="submit" class="btn btn-outline-info"> Update</button>
+                        <button class="btn btn-outline-secondary">Cancel</button>
                     </form>
                 </div>
             </div>

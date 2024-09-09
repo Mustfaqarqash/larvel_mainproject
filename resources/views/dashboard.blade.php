@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <span class="font-weight-normal mb-3 h3"><b>Catigories</b>
-                    </span><i class="mdi mdi-animation mdi-24px"></i>
+                    </span><i class="mdi mdi-collage mdi-24px"></i>
                     <h2 class="mb-5">{{ count($cats) }}</h2>
 
                 </div>
@@ -19,7 +19,7 @@
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <span class="font-weight-normal mb-3 h3"><b>Trips</b>
                     </span>
-                    <i class="mdi mdi-airplane mdi-24px"></i>
+                    <i class="mdi mdi-airballoon mdi-24px"></i>
                     <h2 class="mb-5">{{ count($trips) }}</h2>
 
                 </div>
@@ -30,7 +30,7 @@
                 <div class="card-body">
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <span class="font-weight-normal mb-3 h3"><b> Testamonials </b></span>
-                    <i class="mdi mdi-bookmark-outline mdi-24px"></i>
+                    <i class="mdi mdi-voice mdi-24px"></i>
                     <h2 class="mb-5">{{ count($testamonials) }}</h2>
 
                 </div>
@@ -41,7 +41,7 @@
                 <div class="card-body">
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <span class="font-weight-normal mb-3 h3"><b>Guides</b> </span>
-                    <i class="mdi mdi-book mdi-24px"></i>
+                    <i class="mdi mdi-account-star mdi-24px"></i>
                     <h2 class="mb-5">{{ count($guides) }}</h2>
 
                 </div>
@@ -52,7 +52,7 @@
                 <div class="card-body">
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <span class="font-weight-normal mb-3 h3"><b>bookings</b></span>
-                    <i class="mdi mdi-book-open-page-variant mdi-24px "></i>
+                    <i class="mdi mdi-clipboard-check mdi-24px "></i>
                     <h2 class="mb-5">{{ count($bookings) }}</h2>
                 </div>
             </div>

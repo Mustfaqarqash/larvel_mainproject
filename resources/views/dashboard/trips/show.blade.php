@@ -15,7 +15,7 @@
                             @foreach ($tripImages as $index => $tripImage)
                                 <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                                     <img src="{{ asset($tripImage->image) }}" class="d-block w-100 rounded" alt="Trip Image"
-                                         style="height: 400px; object-fit: cover;">
+                                         style="height: 425px; object-fit: cover;">
                                 </div>
                             @endforeach
                         </div>
@@ -58,6 +58,7 @@
                                             <small class="text-muted">{{ $guide->gender }}, {{ $guide->age }} years
                                                 old</small>
                                         </div>
+
                                     </div>
                                 </div>
                             @endforeach
@@ -67,6 +68,8 @@
                 </div>
             </div>
         </div>
+
+
     </div>
     @guest
         @if (Route::has('login'))
@@ -78,4 +81,59 @@
         @include('include/user_side/booking')
     @endguest
     <!-- Trip Details End -->
+    <!-- Feedback Section -->
+    <div class="container-xxl py-5">
+        <h3 class="mb-4">Feedback</h3>
+
+        <!-- Display existing feedback -->
+        @foreach($feedbacks as $feedback)
+            <div class="bg-light p-4 mb-3 rounded shadow-sm">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        @if($feedback->user)
+                            <img src="{{asset('storage/' .  $feedback->user->image) }}" alt="User Image" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                            <div>
+                                <strong>{{ $feedback->user->name }}</strong> <br>
+                                <small class="text-muted">{{ $feedback->created_at->format('Y-m-d') }}</small>
+                            </div>
+                        @else
+                            <strong>Deleted User</strong>
+                        @endif
+                    </div>
+                    <small class="text-muted">{{ $feedback->created_at->diffForHumans() }}</small>
+                </div>
+                <div class="mt-3">
+                    <p class="mb-0">{{ $feedback->feedback }}</p>
+                </div>
+            </div>
+        @endforeach
+
+        <!-- Feedback Form -->
+        @php
+            $booking = Auth::check() ? \App\Models\Booking::where('user_id', Auth::id())->where('trip_id', $trip->id)->first() : null;
+        @endphp
+
+        @if($booking && $booking->accepted == 1)
+            @auth
+                <div class="bg-light p-4 mt-4 rounded shadow-sm">
+                    <h4>Leave Your Feedback</h4>
+                    <form action="{{ route('trips.storeFeedback', $trip->id) }}" method="POST">
+                        @csrf
+                        <div class="form-group mb-3">
+                            <textarea name="feedback" class="form-control" rows="4" placeholder="Write your feedback here..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                    </form>
+                </div>
+            @else
+                <p>Please <a href="{{ route('login') }}">log in</a> to leave feedback.</p>
+            @endauth
+        @else
+            <p>You can only leave feedback after your booking for this trip has been accepted.</p>
+        @endif
+
+
+    </div>
+
+
 @endsection

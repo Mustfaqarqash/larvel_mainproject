@@ -5,24 +5,25 @@
             <h1 class="mb-5">Meet Our Guide</h1>
         </div>
         <div class="row g-4">
-            @foreach($allguides as $guide)
+            @foreach($allguides->slice(0, 4) as $guide)
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <a href="{{ url('guide/' . $guide->id) }}">
                     <div class="team-item">
                         <div class="overflow-hidden">
                             <img class="img-fluid fixed-size" src="{{asset($guide->image)}}" style="width: 300px; height: 300px;" alt="Image">
                         </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
+                       
                         <div class="text-center p-4">
                             <h5 class="mb-0">{{$guide->name}}</h5>
-                            <small>{{$guide->description}}</small>
+                            <small style="color:grey;">{{$guide->description}}</small>
                         </div>
+                        <div class="text-center mb-10">
+                                <a href="{{ url('guide/' . $guide->id) }}" class="btn btn-primary ">show guide profile</a>
+                            </div>
                     </div>
+                    
                 </a>
+                
                 </div>
             @endforeach
 

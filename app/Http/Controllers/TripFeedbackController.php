@@ -26,10 +26,21 @@ class TripFeedbackController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $tripid)
     {
-        //
+        $request->validate([
+            'feedback' => 'required',
+        ]);
+
+        trip_feedback::create([
+            'trip_id' => $tripid,
+            'user_id' => Auth::id(),
+            'feedback' => $request->input('feedback'),
+        ]);
+
+        return redirect()->route('trips.show', $tripid)->with('success', 'Feedback submitted!');
     }
+
 
     /**
      * Display the specified resource.

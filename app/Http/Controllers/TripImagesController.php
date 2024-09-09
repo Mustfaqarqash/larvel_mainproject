@@ -22,38 +22,37 @@ class TripImagesController extends Controller
     }
 
 
-    public function store(Request $request, $tripid)
+    public function store(Request $request, int $tripid)
     {
-        // Validate the image
+        // Validate that each file in the 'image' array is a valid image
         $validatedData = $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Ensure that an image is required and is of a valid image type
+            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Ensure each file in the array is an image
         ]);
+    
+        $images = [];
 
-        // Handle the image upload
         if ($request->hasFile('image')) {
-            // Get the uploaded file
-            $file = $request->file('image');
-
-            // Generate a unique filename
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-
-            // Define the path where the image will be stored
-            $path = public_path('uploads/trip_images/');
-
-            // Move the image to the specified path
-            $file->move($path, $filename);
-
-            // Save the image path and trip ID to the database
-            trip_images::create([
-                'image' => 'uploads/trip_images/' . $filename, // Save the relative path of the uploaded image
-                'trip_id' => $tripid, // Save the trip ID
-            ]);
+            foreach($request->file('image') as $file) {
+               
+                $filename = time() . '_' . $file->getClientOriginalExtension();
+                $path = public_path('uploads/trip_images/');
+                $file->move($path, $filename);
+    
+               
+                $images[] = [
+                    'image' => 'uploads/trip_images/' . $filename,
+                    'trip_id' => $tripid, 
+                ];
+            }
+    
+            
+            trip_images::insert($images);
         }
-
-        // Redirect to the trips index page
-        return redirect()->route('trips.index');
+    
+       
+        return to_route('trips.showadmin', $tripid);
     }
-
+    
 
 
     public function show(trip_images $trip_images)

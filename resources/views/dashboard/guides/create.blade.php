@@ -28,11 +28,11 @@
                 <select class="form-control" id="gender" name="gender">
                     <option value="male">Male</option>
                     <option value="female">Female</option>
-                    <option value="other">Other</option>
+                   
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary mr-2">Submit</button>
-            <a href="{{ route('guides.index') }}" class="btn btn-light">Cancel</a>
+            <button type="submit" class="btn btn-gradient-primary me-2">Add new guide</button>
+            <a href="{{ route('guides.index') }}" class="btn btn-outline-secondary">Cancel</a>
         </form>
     </div>
 </div>

@@ -3,10 +3,10 @@
 @section('headTitle', 'Categories')
 
 @section('content')
-    <div class="container">
+    <div class="container card p-5">
 
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="title-1">contacts</h2>
+            <h2 class="title-1">Contacts</h2>
 
         </div>
 
@@ -38,7 +38,7 @@
                             <td>
 
 
-                                <button type="button" class="btn btn-danger" onclick="confirmDeletion(event, '{{ route('contact.destroy', $contact->id) }}')">DELETE</button>
+                                <button type="button" class="btn btn-outline-danger" onclick="confirmDeletion(event, '{{ route('contact.destroy', $contact->id) }}')"><i class="mdi mdi-delete"></i></button>
                             </td>
                             </tr>
                         @endforeach
@@ -52,8 +52,8 @@
     <div id="confirmationModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000;">
         <div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;">
             <p>Are you sure you want to delete this category?</p>
-            <button id="confirmButton" class="btn btn-danger">Confirm</button>
-            <button id="cancelButton" class="btn btn-secondary">Cancel</button>
+            <button id="confirmButton" class="btn btn-outline-danger">Delete</button>
+            <button id="cancelButton" class="btn btn-outline-secondary">Cancel</button>
         </div>
     </div>
 

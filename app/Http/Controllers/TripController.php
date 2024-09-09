@@ -6,6 +6,7 @@ use App\Models\guide;
 use App\Models\guide_trip;
 use App\Models\trip;
 use App\Models\category;
+use App\Models\trip_feedback;
 use App\Models\trip_images;
 use Illuminate\Http\Request;
 use App\Models\Booking;
@@ -56,32 +57,28 @@ class TripController extends Controller
      */
     public function show($tripid)
     {
-        // Find the trip by ID
         $trip = Trip::find($tripid);
-
-        // Get all the guide_trip records related to this trip
         $tripGuids = Guide_Trip::where('trip_id', $tripid)->get();
-
-        // Initialize an empty array to hold the guide details
         $guides = [];
-
-        // Loop through each guide_trip record
         foreach ($tripGuids as $tripGuid) {
-            // Find the guide by its ID and add it to the $guides array
             $guide = Guide::find($tripGuid->guide_id);
             array_push($guides, $guide);
         }
-
-        // Get all the images associated with the trip
         $tripImages = Trip_Images::where('trip_id', $tripid)->get();
 
-        // Pass the trip, guides, and images data to the view
+        // Fetch feedbacks for this trip
+        $feedbacks = Trip_Images::where('trip_id', $tripid)->get();
+            //trip_feedback::where('trip_id', $tripid)->get();
+
         return view('dashboard/trips/show', [
+            'feedbacks' => $feedbacks, // pass feedbacks to the view
             'tripImages' => $tripImages,
             'tripGuids' => $guides,
-            'trip' => $trip
+            'trip' => $trip,
+
         ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -116,7 +113,7 @@ class TripController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(trip $trip)
+    public function destroy($trip)
     {
         $trip->delete();
         return to_route('trips.index');
@@ -144,12 +141,16 @@ class TripController extends Controller
 
         // Get all the images associated with the trip
         $tripImages = Trip_Images::where('trip_id', $tripid)->get();
+        $feedbacks = trip_feedback::where('trip_id', $tripid)->get();
+//        dd($feedbacks);
+        //
 
         // Pass the trip, guides, and images data to the view
         return view('dashboard/trips/show', [
             'tripImages' => $tripImages,
             'tripGuids' => $guides,
-            'trip' => $trip
+            'trip' => $trip,
+            'feedbacks' => $feedbacks, // pass feedbacks to the view
         ]);
     }
 
@@ -252,6 +253,21 @@ class TripController extends Controller
         ]);
 
     }
+    public function storeFeedback(Request $request, $tripid)
+    {
+        $request->validate([
+            'feedback' => 'required',
+        ]);
+
+        trip_feedback::create([
+            'trip_id' => $tripid,
+            'user_id' => Auth::id(),
+            'feedback' => $request->input('feedback'),
+        ]);
+
+        return redirect()->back();
+    }
+
 
 
 }

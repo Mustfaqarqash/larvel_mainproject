@@ -27,4 +27,6 @@ class trip extends Model
         return $this->hasMany(trip_images::class,'trip_id');
     }
 
+
+
 }

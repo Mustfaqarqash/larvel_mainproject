@@ -10,7 +10,7 @@
             @foreach($testimonials->slice(0, 6) as $testimonial)
                 <div class="testimonial-item bg-white text-center border p-4" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                     @if($testimonial->user->image)
-                        <img src="{{ asset('storage/'.$testimonial->user->image) }}" alt="Category Image" style="width: 50px; height: 50px; border-radius: 50%;">
+                        <img src="{{ asset('storage/'.$testimonial->user->image) }}" alt="user Image" style="width: 50px; height: 50px; border-radius: 50%;">
                     @else
                         <img src="{{asset('default-profile.jpg')}}" alt="" style="width: 100px; height: 100px; border-radius: 50%;margin:20px ">
                     @endif

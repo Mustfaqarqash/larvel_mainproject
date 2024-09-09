@@ -8,54 +8,45 @@
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="service-item rounded pt-3">
                     <div class="p-4">
-                        <i class="fa fa-3x fa-globe text-primary mb-4"></i>
-                        <h5>WorldWide Tours</h5>
-                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                    <i class="fa fa-3x fa-cog text-primary mb-4"></i>
+                        <h5>Custom Planning</h5>
+                        <p>Tailored itineraries designed to match your specific adventure preferences.</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="service-item rounded pt-3">
                     <div class="p-4">
-                        <i class="fa fa-3x fa-hotel text-primary mb-4"></i>
-                        <h5>Hotel Reservation</h5>
-                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                        <i class="fa fa-3x fa-user text-primary mb-4"></i>
+                        <h5>Guided Trekking</h5>
+                        <p>Expert-led treks through stunning landscapes for an immersive experience.</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="service-item rounded pt-3">
                     <div class="p-4">
-                        <i class="fa fa-3x fa-user text-primary mb-4"></i>
-                        <h5>Travel Guides</h5>
-                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                        <i class="fa fa-3x fa-hotel text-primary mb-4"></i>
+                        <h5>Cultural Tours</h5>
+                        <p>Deep dive into local cultures with curated experiences and authentic interactions.</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                 <div class="service-item rounded pt-3">
                     <div class="p-4">
-                        <i class="fa fa-3x fa-cog text-primary mb-4"></i>
-                        <h5>Event Management</h5>
-                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                    <i class="fa fa-3x fa-cog text-primary mb-4"></i>
+                        <h5>Wildlife Safaris</h5>
+                        <p>Experience close encounters with wildlife in their natural habitats, guided by experts.</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="service-item rounded pt-3">
                     <div class="p-4">
-                        <i class="fa fa-3x fa-globe text-primary mb-4"></i>
-                        <h5>WorldWide Tours</h5>
-                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="service-item rounded pt-3">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-hotel text-primary mb-4"></i>
-                        <h5>Hotel Reservation</h5>
-                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                        <i class="fa fa-3x fa-cog text-primary mb-4"></i>
+                        <h5>Adventure Skills</h5>
+                        <p>Comprehensive workshops to equip you with vital outdoor skills and survival techniques.</p>
                     </div>
                 </div>
             </div>
@@ -63,17 +54,27 @@
                 <div class="service-item rounded pt-3">
                     <div class="p-4">
                         <i class="fa fa-3x fa-user text-primary mb-4"></i>
-                        <h5>Travel Guides</h5>
-                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                        <h5>Group Packages</h5>
+                        <p>Specially crafted adventures with tailored activities and discounts for groups.</p>
                     </div>
                 </div>
             </div>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item rounded pt-3">
+                    <div class="p-4">
+                        <i class="fa fa-3x fa-hotel text-primary mb-4"></i>
+                        <h5>Luxury Escapes</h5>
+                        <p>High-end adventures featuring top-tier accommodations and exclusive access.</p>
+                    </div>
+                </div>
+            </div>
+            
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                 <div class="service-item rounded pt-3">
                     <div class="p-4">
-                        <i class="fa fa-3x fa-cog text-primary mb-4"></i>
-                        <h5>Event Management</h5>
-                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                        <i class="fa fa-3x fa-globe text-primary mb-4"></i>
+                        <h5>Eco Travel</h5>
+                        <p>Environmentally responsible travel options focusing on sustainability and conservation.</p>
                     </div>
                 </div>
             </div>

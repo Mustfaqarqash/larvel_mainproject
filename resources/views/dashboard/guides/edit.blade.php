@@ -28,11 +28,11 @@
                 <select class="form-control" id="gender" name="gender">
                     <option value="Male" {{ $guide->gender == 'Male' ? 'selected' : '' }}>Male</option>
                     <option value="Female" {{ $guide->gender == 'Female' ? 'selected' : '' }}>Female</option>
-                    <option value="Other" {{ $guide->gender == 'Other' ? 'selected' : '' }}>Other</option>
+                   
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary mr-2">Update</button>
-            <a href="{{ route('guides.index') }}" class="btn btn-light">Cancel</a>
+            <button type="submit" class="btn btn-outline-info">Update</button>
+            <a href="{{ route('guides.index') }}" class="btn btn-outline-secondary">Cancel</a>
         </form>
     </div>
 </div>

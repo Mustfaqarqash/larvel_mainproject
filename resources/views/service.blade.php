@@ -1,6 +1,7 @@
 @extends("layouts/user_side_master")
-@section("pagename", "categories")
-@section("categories_active", "active")
+@section("pagename", "Our services")
+@section("hero", "Discover Tailored Adventures That Transform Your Travel Dreams Into Reality")
+
 @section("content")
     <!-- Categories Carousel Start -->
     <style>
@@ -19,11 +20,12 @@
 
     <div class="container-xxl py-5">
         <div class="container">
-            <h2 class="text-center mb-4">Categories</h2>
-
+        <div class="text-center wow fadeInUp mb-5" data-wow-delay="0.1s">
+            <h2 class="section-title bg-white text-center text-primary px-3">Categories</h2>
+</div>
             <div id="categoriesCarousel" class="carousel slide">
                 <div class="carousel-inner">
-                    @foreach($categories->chunk(5) as $chunk)
+                    @foreach($categories->chunk(20) as $chunk)
                         <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                             <div class="row">
                                 @foreach($chunk as $category)
@@ -46,14 +48,7 @@
                         </div>
                     @endforeach
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#categoriesCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#categoriesCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+               
             </div>
         </div>
     </div>
@@ -91,7 +86,7 @@
 
         <div class="container-xxl py-5">
                         <div class="text-center mb-4">
-                            <h1 class="mb-5"><span class="active">{{ isset($cat_name) && $cat_name->name ? $cat_name->name : 'Mostafa' }}</span>Trips</h1>
+                            <h1 class="mb-5"><span class="text-primary">{{ isset($cat_name) && $cat_name->name ? $cat_name->name : 'All ' }}</span> trips</h1>
                         </div>
             <div class="container">
 
@@ -148,8 +143,8 @@
                                 </div>
                                 <p>{{ $trip->description }}</p>
                                 <div class="d-flex justify-content-center mb-2">
-                                    <a href="" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
-                                    <a href="" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                                    <a href="{{ route('trips.showBooking', $trip->id) }}" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
+                                    <a href="{{ route('trips.showBooking', $trip->id) }}" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
                                 </div>
                             </div>
                         </div>

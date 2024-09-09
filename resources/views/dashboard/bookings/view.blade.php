@@ -11,6 +11,8 @@
                 <strong>Status:</strong> {{ $booking->status }}<br>
                 <strong>Total Price:</strong> {{ $booking->trip->price }}
             </p>
+            
+            <a href="{{url('/booking')}}" class="btn btn-gradient-primary me-2">Back to list</a>
         </div>
     </div>
 

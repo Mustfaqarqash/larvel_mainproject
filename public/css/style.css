@@ -222,6 +222,13 @@
     left: 0;
 }
 
+.package-item img {
+    width: 100%; /* Full width */
+    height: 250px; /* Fixed height for all images */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+
 
 /*** Service ***/
 .service-item {
@@ -268,7 +275,7 @@
 
 /*** Booking ***/
 .booking {
-    background: linear-gradient(rgba(15, 23, 43, .7), rgba(15, 23, 43, .7)), url(../img/booking.jpg);
+    background: linear-gradient(rgba(15, 23, 43, .7), rgba(15, 23, 43, .7)), url(../img/R.jpeg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

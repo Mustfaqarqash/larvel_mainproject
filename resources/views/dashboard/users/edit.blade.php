@@ -22,6 +22,7 @@
                 <label for="phone">phone</label>
                 <input type="text" class="form-control" id="phone" name="phone" value="{{$user->phone}}">
             </div>
+           @if(Auth()->user()->usertype == "superAdmin")
             <div class="form-group">
                 <label for="usertype">usertype</label>
                 <select  class="form-control" id="usertype" name="usertype" value="{{$user->usertype}}">
@@ -30,8 +31,11 @@
                     <option @selected($user->usertype == 'admin' ) >admin</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary mr-2">Submit</button>
-            <a href="{{ route('users.index') }}" class="btn btn-light">Cancel</a>
+           
+           
+           @endif
+            <button type="submit" class="btn btn-outline-info">Update</button>
+            <a href="{{ route('users.index') }}" class="btn btn-outline-secondary">Cancel</a>
         </form>
     </div>
 </div>

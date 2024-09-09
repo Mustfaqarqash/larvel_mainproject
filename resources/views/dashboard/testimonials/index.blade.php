@@ -33,11 +33,11 @@
                             <tr>
                                 <th scope="row">{{ $testimonial->id }}</th>
                                 <td>
-                                    @if($testimonial->user->image)
-                                        <img src="{{ asset($testimonial->user->image) }}" alt="Category Image" style="width: 50px; border-radius: 50px;">
-                                    @else
-                                        <img src="https://t4.ftcdn.net/jpg/03/49/49/79/360_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.webp" alt="Category Image"  style="width: 50px; height: 50px; border-radius: 50%;">
-                                    @endif
+                                @if($testimonial->user->image)
+                        <img src="{{ asset('storage/'.$testimonial->user->image) }}" alt="user Image" style="width: 50px; height: 50px; border-radius: 50%;">
+                    @else
+                        <img src="{{asset('default-profile.jpg')}}" alt="" style="width: 100px; height: 100px; border-radius: 50%;margin:20px ">
+                    @endif
                                 </td>
                                 <td>{{$testimonial->user->name}}</td>
                                 <td>{{ $testimonial->testimonial }}</td>
@@ -62,8 +62,8 @@
     <div id="confirmationModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000;">
         <div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;">
             <p>Are you sure you want to delete this category?</p>
-            <button id="confirmButton" class="btn btn-danger">Confirm</button>
-            <button id="cancelButton" class="btn btn-secondary">Cancel</button>
+            <button id="confirmButton" class="btn btn-outline-danger">Delete</button>
+            <button id="cancelButton" class="btn btn-outline-secondary">Cancel</button>
         </div>
     </div>
 

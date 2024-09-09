@@ -47,7 +47,7 @@
                             <th scope="col">ID</th>
                             <th scope="col">Image</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Description</th>
+{{--                            <th scope="col">Description</th>--}}
                             <th scope="col">Date</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -59,26 +59,26 @@
                                 <td>
                                     @if($category->image)
                                         <img src="{{ asset($category->image) }}" alt="Category Image"
-                                            style="width: 50px; border-radius: 50px;">
+                                            style=" border-radius: 50%;">
                                         {{-- تُستخدم الدالة asset للحصول على URL كامل للملفات الموجودة في مجلد public --}}
                                     @else
                                         <span>No Image</span>
                                     @endif
                                 </td>
                                 <td>{{ $category->name }}</td>
-                                <td>{{ $category->description }}</td>
+{{--                                <td>{{ $category->description }}</td>--}}
                                 <td>{{ $category->created_at->format('Y-m-d') }}</td>
                                 <td>
-                                    <a href="{{ route('categories.edit', $category->id) }}" title="edit">
+                                    <a href="{{ route('categories.edit', $category->id) }}" title="Edit">
                                         <button type="submit" class="btn btn-outline-info" ><i
                                                 class="mdi mdi-table-edit"></i></button>
                                     </a>
                                     <a href="{{ route('categoties', $category->id) }}" title="view">
                                         <button type="submit" class="btn btn-outline-primary"><i
-                                                class="mdi mdi-information-outline"title="view"></i></button>
+                                                class="mdi mdi-information-outline"title="View"></i></button>
                                     </a>
                                     <button type="button" class="btn btn-outline-danger"
-                                        onclick="confirmDeletion(event, '{{ route('categories.destroy', $category->id) }}')" title="delete"><i
+                                        onclick="confirmDeletion(event, '{{ route('categories.destroy', $category->id) }}')" title="Delete"><i
                                             class="mdi mdi-delete" ></i></button>
                                 </td>
                             </tr>
@@ -95,8 +95,8 @@
     style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000;">
     <div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;">
         <p>Are you sure you want to delete this category?</p>
-        <button id="confirmButton" class="btn btn-danger">Confirm</button>
-        <button id="cancelButton" class="btn btn-secondary">Cancel</button>
+        <button id="confirmButton" class="btn btn-outline-danger">delete</button>
+        <button id="cancelButton" class="btn btn-outline-secondary">Cancel</button>
     </div>
 </div>
 
